@@ -1,0 +1,39 @@
+{
+  "testCardData": [
+    {
+      "type": "valid",
+      "cardNumber": "4111111111111111",
+      "expDate": "12/34",
+      "cvv": "123",
+      "description": "Valid Visa card for successful transactions"
+    },
+    {
+      "type": "declined",
+      "cardNumber": "4000000000009995",
+      "expDate": "12/34",
+      "cvv": "111",
+      "description": "Card that will be declined"
+    },
+    {
+      "type": "expired",
+      "cardNumber": "4111111111111111",
+      "expDate": "01/20",
+      "cvv": "123",
+      "description": "Expired card"
+    },
+    {
+      "type": "insufficient_funds",
+      "cardNumber": "4000000000000002",
+      "expDate": "12/34",
+      "cvv": "123",
+      "description": "Card with insufficient funds"
+    },
+    {
+      "type": "invalid_cvv",
+      "cardNumber": "4111111111111111",
+      "expDate": "12/34",
+      "cvv": "999",
+      "description": "Card with invalid CVV"
+    }
+  ]
+}

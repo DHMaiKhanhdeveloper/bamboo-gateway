@@ -1,0 +1,79 @@
+name: Nightly Regression (sharded)
+
+on:
+  schedule:
+    - cron: "0 19 * * 1-5" # 19:00 UTC weekdays
+  workflow_dispatch:
+    inputs:
+      grep:
+        description: "Optional --grep filter"
+        required: false
+        default: "@regression"
+
+env:
+  TOTAL_SHARDS: 4
+
+jobs:
+  test:
+    name: Test ${{ matrix.project }} shard ${{ matrix.shard }}/${{ env.TOTAL_SHARDS }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium-ui, chromium-api]
+        shard: [1, 2, 3, 4]
+    env:
+      CI: "true"
+      BASE_URL: ${{ secrets.BASE_URL }}
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      TOTP_SECRET: ${{ secrets.TOTP_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run tests
+        run: |
+          npx playwright test \
+            --project=${{ matrix.project }} \
+            --grep "${{ github.event.inputs.grep || '@regression' }}" \
+            --shard=${{ matrix.shard }}/${{ env.TOTAL_SHARDS }} \
+            --reporter=blob
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blob-${{ matrix.project }}-${{ matrix.shard }}
+          path: blob-report/
+          retention-days: 7
+
+  merge-reports:
+    name: Merge blob reports
+    if: always()
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
+          pattern: blob-*
+          merge-multiple: true
+      - run: npx playwright merge-reports --reporter=html,json all-blob-reports
+      - uses: actions/upload-artifact@v4
+        with:
+          name: merged-html-report
+          path: |
+            playwright-report/
+            test-results.json
+          retention-days: 14

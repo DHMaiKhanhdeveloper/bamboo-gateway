@@ -1,0 +1,11 @@
+id,name,description,price,category,sku,stock_quantity,active
+1,"Test Product 1","Basic test product for checkout scenarios",9.99,"Electronics","SKU-001",100,true
+2,"Test Product 2","Premium test product for high-value transactions",99.99,"Electronics","SKU-002",50,true
+3,"Test Product 3","Budget test product for low-value transactions",1.99,"Accessories","SKU-003",200,true
+4,"Test Product 4","Expensive test product for limit testing",999.99,"Premium","SKU-004",10,true
+5,"Test Product 5","Free test product for zero amount testing",0.00,"Samples","SKU-005",1000,true
+6,"Test Product 6","Disabled test product",19.99,"Electronics","SKU-006",0,false
+7,"Digital Product 1","Digital download test product",29.99,"Digital","SKU-007",999,true
+8,"Subscription Service","Monthly subscription test product",14.99,"Services","SKU-008",999,true
+9,"Gift Card","Test gift card product",50.00,"Gift Cards","SKU-009",100,true
+10,"Bundle Product","Test product bundle with multiple items",149.99,"Bundles","SKU-010",25,true

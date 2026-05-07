@@ -1,0 +1,63 @@
+{
+  "testCases": [
+    {
+      "id": "1",
+      "name": "POR-372",
+      "status": "passed",
+      "browser": "Chrome",
+      "duration": 1200,
+      "suite": "Feature Tests",
+      "retries": 0,
+      "timestamp": "2025-01-10T14:52:43.000Z"
+    },
+    {
+      "id": "2",
+      "name": "POR-344",
+      "status": "failed",
+      "browser": "Chrome",
+      "duration": 800,
+      "suite": "Feature Tests",
+      "error": "Test failed: POR-344",
+      "retries": 0,
+      "timestamp": "2025-01-10T14:50:20.000Z"
+    },
+    {
+      "id": "3",
+      "name": "AUTH-001",
+      "status": "passed",
+      "browser": "Chrome",
+      "duration": 1500,
+      "suite": "Authentication",
+      "retries": 0,
+      "timestamp": "2025-01-10T14:48:15.000Z"
+    },
+    {
+      "id": "4",
+      "name": "VT-001",
+      "status": "skipped",
+      "browser": "Chrome",
+      "duration": 0,
+      "suite": "Virtual Terminal",
+      "retries": 0,
+      "timestamp": "2025-01-10T14:45:30.000Z"
+    },
+    {
+      "id": "5",
+      "name": "CAT-001",
+      "status": "passed",
+      "browser": "Chrome",
+      "duration": 900,
+      "suite": "Category Management",
+      "retries": 0,
+      "timestamp": "2025-01-10T14:42:10.000Z"
+    }
+  ],
+  "lastUpdated": "2025-01-10T14:52:43.000Z",
+  "stats": {
+    "total": 15,
+    "passed": 9,
+    "failed": 4,
+    "skipped": 2,
+    "duration": "0m 4s"
+  }
+}

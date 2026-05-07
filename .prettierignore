@@ -1,0 +1,11 @@
+node_modules
+reports
+test-results
+blob-report
+playwright-report
+allure-results
+allure-report
+.auth
+dist
+*.min.js
+package-lock.json

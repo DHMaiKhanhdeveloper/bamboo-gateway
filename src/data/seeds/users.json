@@ -1,0 +1,67 @@
+{
+  "testUsers": [
+    {
+      "id": "admin-test",
+      "username": "admin.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "support-test",
+      "username": "support.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "master-merchant1-test",
+      "username": "master_merchant1.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "master-merchant2-test",
+      "username": "master_merchant2.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "master-merchant3-test",
+      "username": "master_merchant3.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "merchant1-test",
+      "username": "merchant1.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "merchant2-test",
+      "username": "merchant2.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "master-reseller-test",
+      "username": "master_reseller.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    },
+    {
+      "id": "reseller-test",
+      "username": "reseller.test",
+      "password": "Qwerty@12345",
+      "terminals": ["0199195d-afb4-7f8f-b957-57a9ca76e7d9"],
+      "totpSecret": "YLBN7TDW42MQTCP6TC24NAE4KSQXD2IASBG3EQFCHGCTOJKYR46A"
+    }
+  ]
+}
