@@ -2,7 +2,9 @@ name: PR check (smoke + lint + typecheck)
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [master]
+  push:
+    branches: [master]
   workflow_dispatch:
 
 concurrency:

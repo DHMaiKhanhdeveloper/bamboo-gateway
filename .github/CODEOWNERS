@@ -1,0 +1,12 @@
+# Default owner for all files
+* @DHMaiKhanhdeveloper
+
+# Test framework core
+/src/                @DHMaiKhanhdeveloper
+/tests/              @DHMaiKhanhdeveloper
+
+# CI / workflows
+/.github/            @DHMaiKhanhdeveloper
+
+# Dashboard
+/dashboard/          @DHMaiKhanhdeveloper
