@@ -27,7 +27,7 @@ export class AuthError extends FrameworkError {
   override readonly name = "AuthError";
   constructor(
     message: string,
-    public readonly cause?: unknown
+    public override readonly cause?: unknown
   ) {
     super(message, { cause });
   }

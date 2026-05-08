@@ -16,6 +16,8 @@ export default tseslint.config(
       ".auth/**",
       "dist/**",
       "*.config.js",
+      "dashboard/**",
+      "docs/**",
     ],
   },
   js.configs.recommended,
@@ -47,6 +49,7 @@ export default tseslint.config(
       "prefer-const": "error",
       "no-var": "error",
       eqeqeq: ["error", "always"],
+      "no-empty-pattern": "off",
     },
   },
   {
@@ -54,8 +57,9 @@ export default tseslint.config(
     ...playwright.configs["flat/recommended"],
     rules: {
       ...playwright.configs["flat/recommended"].rules,
-      "playwright/no-skipped-test": "warn",
-      "playwright/no-conditional-in-test": "warn",
+      "playwright/no-skipped-test": "off",
+      "playwright/no-conditional-in-test": "off",
+      "playwright/no-conditional-expect": "off",
       "playwright/expect-expect": "off",
     },
   },

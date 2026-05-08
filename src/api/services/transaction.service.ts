@@ -138,10 +138,10 @@ export class TransactionApiService {
   // Settlement
   // ===========================================================================
   async batchClose(request: APIRequestContext): Promise<APIResponse> {
-    return request.post(
-      `${this.baseURL}/merchants/${this.merchantId}/transactions/batch-close`,
-      { headers: this.getHeaders(), data: { requestId: generateRequestId() } }
-    );
+    return request.post(`${this.baseURL}/merchants/${this.merchantId}/transactions/batch-close`, {
+      headers: this.getHeaders(),
+      data: { requestId: generateRequestId() },
+    });
   }
 
   // ===========================================================================
@@ -242,7 +242,8 @@ export class TransactionApiService {
   async verifyTransactionResponse(response: APIResponse): Promise<VerifiedTransactionResponse> {
     const status = response.status();
     const contentType = response.headers()["content-type"] ?? "";
-    const isJson = contentType.includes("application/json") || contentType.includes("application/ld+json");
+    const isJson =
+      contentType.includes("application/json") || contentType.includes("application/ld+json");
 
     if (!response.ok() || !isJson) {
       const text = await response.text();
@@ -294,5 +295,7 @@ export class TransactionApiService {
     return false;
   }
 
-  generateRequestId(): string { return generateRequestId(); }
+  generateRequestId(): string {
+    return generateRequestId();
+  }
 }

@@ -30,17 +30,43 @@ export interface PageFixtures {
 }
 
 export const pagesTest = base.extend<PageFixtures>({
-  loginPage: async ({ page }, use) => { await use(new LoginPage(page)); },
-  merchantPage: async ({ page }, use) => { await use(new MerchantPage(page)); },
-  customerPage: async ({ page }, use) => { await use(new CustomerPage(page)); },
-  productPage: async ({ page }, use) => { await use(new ProductPage(page)); },
-  categoryPage: async ({ page }, use) => { await use(new CategoryPage(page)); },
-  employeePage: async ({ page }, use) => { await use(new EmployeePage(page)); },
-  userPage: async ({ page }, use) => { await use(new UserPage(page)); },
-  terminalPage: async ({ page }, use) => { await use(new TerminalPage(page)); },
-  transactionPage: async ({ page }, use) => { await use(new TransactionPage(page)); },
-  virtualTerminalPage: async ({ page }, use) => { await use(new VirtualTerminalPage(page)); },
-  headerComponent: async ({ page }, use) => { await use(new HeaderComponent(page)); },
-  leftMenuComponent: async ({ page }, use) => { await use(new LeftMenuComponent(page)); },
-  toastComponent: async ({ page }, use) => { await use(new ToastComponent(page)); },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+  merchantPage: async ({ page }, use) => {
+    await use(new MerchantPage(page));
+  },
+  customerPage: async ({ page }, use) => {
+    await use(new CustomerPage(page));
+  },
+  productPage: async ({ page }, use) => {
+    await use(new ProductPage(page));
+  },
+  categoryPage: async ({ page }, use) => {
+    await use(new CategoryPage(page));
+  },
+  employeePage: async ({ page }, use) => {
+    await use(new EmployeePage(page));
+  },
+  userPage: async ({ page }, use) => {
+    await use(new UserPage(page));
+  },
+  terminalPage: async ({ page }, use) => {
+    await use(new TerminalPage(page));
+  },
+  transactionPage: async ({ page }, use) => {
+    await use(new TransactionPage(page));
+  },
+  virtualTerminalPage: async ({ page }, use) => {
+    await use(new VirtualTerminalPage(page));
+  },
+  headerComponent: async ({ page }, use) => {
+    await use(new HeaderComponent(page));
+  },
+  leftMenuComponent: async ({ page }, use) => {
+    await use(new LeftMenuComponent(page));
+  },
+  toastComponent: async ({ page }, use) => {
+    await use(new ToastComponent(page));
+  },
 });

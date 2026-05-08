@@ -1,4 +1,4 @@
-import type { Page, Response } from "@playwright/test";
+import type { Page, Response, Locator } from "@playwright/test";
 import { expect } from "@playwright/test";
 import { Logger } from "~/core/logger/logger";
 
@@ -25,7 +25,7 @@ export abstract class BasePage {
   protected abstract get urlPath(): string;
 
   /** Element that signals the page has finished loading. */
-  protected abstract readyLocator(): import("@playwright/test").Locator;
+  protected abstract readyLocator(): Locator;
 
   /**
    * Navigate to this page (relative to baseURL) and wait until ready.

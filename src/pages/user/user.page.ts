@@ -23,7 +23,9 @@ export interface EditUserFormData {
 }
 
 export class UserPage extends BasePage {
-  protected override get urlPath(): string { return "/users"; }
+  protected override get urlPath(): string {
+    return "/users";
+  }
   protected override readyLocator(): Locator {
     return this.page.getByRole("heading", { name: "Users" });
   }
@@ -31,30 +33,70 @@ export class UserPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Locators — Account Information
   // ---------------------------------------------------------------------------
-  get addUserText(): Locator { return this.page.getByRole("heading", { name: "Add User" }); }
-  get usernameInput(): Locator { return this.page.getByTestId("username-input"); }
-  get userTypeSelect(): Locator { return this.page.getByTestId("user-type-select"); }
-  get passwordInput(): Locator { return this.page.getByTestId("password-input"); }
-  get emailInput(): Locator { return this.page.getByTestId("email-input"); }
-  get managerInput(): Locator { return this.page.getByTestId("manager-select"); }
-  get confirmPasswordInput(): Locator { return this.page.getByTestId("confirm-password-input"); }
+  get addUserText(): Locator {
+    return this.page.getByRole("heading", { name: "Add User" });
+  }
+  get usernameInput(): Locator {
+    return this.page.getByTestId("username-input");
+  }
+  get userTypeSelect(): Locator {
+    return this.page.getByTestId("user-type-select");
+  }
+  get passwordInput(): Locator {
+    return this.page.getByTestId("password-input");
+  }
+  get emailInput(): Locator {
+    return this.page.getByTestId("email-input");
+  }
+  get managerInput(): Locator {
+    return this.page.getByTestId("manager-select");
+  }
+  get confirmPasswordInput(): Locator {
+    return this.page.getByTestId("confirm-password-input");
+  }
 
   // Personal Information
-  get firstNameInput(): Locator { return this.page.getByTestId("first-name-input"); }
-  get lastNameInput(): Locator { return this.page.getByTestId("last-name-input"); }
-  get titleInput(): Locator { return this.page.getByTestId("title-input"); }
-  get phoneInput(): Locator { return this.page.getByTestId("phone-input"); }
-  get countrySelector(): Locator { return this.page.locator("button").filter({ hasText: /\+/ }).first(); }
-  get countrySearchInput(): Locator { return this.page.getByPlaceholder("Search country..."); }
+  get firstNameInput(): Locator {
+    return this.page.getByTestId("first-name-input");
+  }
+  get lastNameInput(): Locator {
+    return this.page.getByTestId("last-name-input");
+  }
+  get titleInput(): Locator {
+    return this.page.getByTestId("title-input");
+  }
+  get phoneInput(): Locator {
+    return this.page.getByTestId("phone-input");
+  }
+  get countrySelector(): Locator {
+    return this.page.locator("button").filter({ hasText: /\+/ }).first();
+  }
+  get countrySearchInput(): Locator {
+    return this.page.getByPlaceholder("Search country...");
+  }
 
   // Role & Permissions
-  get roleTemplateSelect(): Locator { return this.page.getByTestId("permissions-field").getByRole("combobox"); }
-  get selectAllPermissionsButton(): Locator { return this.page.getByRole("button", { name: "Select All" }); }
-  get clearAllPermissionsButton(): Locator { return this.page.getByRole("button", { name: "Clear All" }); }
-  get expandAllLink(): Locator { return this.page.getByRole("button", { name: "Expand All" }); }
-  get collapseAllLink(): Locator { return this.page.getByRole("button", { name: "Collapse All" }); }
-  get createUserButton(): Locator { return this.page.getByTestId("submit-button"); }
-  get permissionsCount(): Locator { return this.page.getByText(/of \d+ permissions selected/); }
+  get roleTemplateSelect(): Locator {
+    return this.page.getByTestId("permissions-field").getByRole("combobox");
+  }
+  get selectAllPermissionsButton(): Locator {
+    return this.page.getByRole("button", { name: "Select All" });
+  }
+  get clearAllPermissionsButton(): Locator {
+    return this.page.getByRole("button", { name: "Clear All" });
+  }
+  get expandAllLink(): Locator {
+    return this.page.getByRole("button", { name: "Expand All" });
+  }
+  get collapseAllLink(): Locator {
+    return this.page.getByRole("button", { name: "Collapse All" });
+  }
+  get createUserButton(): Locator {
+    return this.page.getByTestId("submit-button");
+  }
+  get permissionsCount(): Locator {
+    return this.page.getByText(/of \d+ permissions selected/);
+  }
 
   // ---------------------------------------------------------------------------
   // Manager search
@@ -144,10 +186,18 @@ export class UserPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Account Information actions
   // ---------------------------------------------------------------------------
-  async fillUsername(username: string): Promise<void> { await this.usernameInput.fill(username); }
-  async fillPassword(password: string): Promise<void> { await this.passwordInput.fill(password); }
-  async fillEmail(email: string): Promise<void> { await this.emailInput.fill(email); }
-  async fillConfirmPassword(password: string): Promise<void> { await this.confirmPasswordInput.fill(password); }
+  async fillUsername(username: string): Promise<void> {
+    await this.usernameInput.fill(username);
+  }
+  async fillPassword(password: string): Promise<void> {
+    await this.passwordInput.fill(password);
+  }
+  async fillEmail(email: string): Promise<void> {
+    await this.emailInput.fill(email);
+  }
+  async fillConfirmPassword(password: string): Promise<void> {
+    await this.confirmPasswordInput.fill(password);
+  }
 
   async selectUserType(userType: string): Promise<void> {
     await this.userTypeSelect.click();
@@ -166,8 +216,12 @@ export class UserPage extends BasePage {
   }
 
   // Personal Information
-  async fillFirstName(firstName: string): Promise<void> { await this.firstNameInput.fill(firstName); }
-  async fillLastName(lastName: string): Promise<void> { await this.lastNameInput.fill(lastName); }
+  async fillFirstName(firstName: string): Promise<void> {
+    await this.firstNameInput.fill(firstName);
+  }
+  async fillLastName(lastName: string): Promise<void> {
+    await this.lastNameInput.fill(lastName);
+  }
 
   async fillTitle(title: string): Promise<void> {
     await this.titleInput.clear();
@@ -205,10 +259,18 @@ export class UserPage extends BasePage {
     await this.page.getByRole("option", { name: optionName, exact: true }).click();
   }
 
-  async selectAllPermissions(): Promise<void> { await this.selectAllPermissionsButton.click(); }
-  async clearAllPermissions(): Promise<void> { await this.clearAllPermissionsButton.click(); }
-  async expandAllPermissions(): Promise<void> { await this.expandAllLink.click(); }
-  async collapseAllPermissions(): Promise<void> { await this.collapseAllLink.click(); }
+  async selectAllPermissions(): Promise<void> {
+    await this.selectAllPermissionsButton.click();
+  }
+  async clearAllPermissions(): Promise<void> {
+    await this.clearAllPermissionsButton.click();
+  }
+  async expandAllPermissions(): Promise<void> {
+    await this.expandAllLink.click();
+  }
+  async collapseAllPermissions(): Promise<void> {
+    await this.collapseAllLink.click();
+  }
 
   async selectPermissionCategoryByCheckbox(): Promise<void> {
     await this.page.locator(".peer.border-input").first().click();
@@ -221,7 +283,9 @@ export class UserPage extends BasePage {
     await this.page.getByRole("switch", { name: permissionName }).click();
   }
 
-  async submitUserForm(): Promise<void> { await this.createUserButton.click(); }
+  async submitUserForm(): Promise<void> {
+    await this.createUserButton.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Form composition
@@ -275,21 +339,37 @@ export class UserPage extends BasePage {
     await expect(this.page.locator(`text=${text}`)).toBeVisible();
   }
 
-  async verifyPasswordRequired(): Promise<void> { await this.expectText("Password is required"); }
-  async verifyFirstNameTooLong(): Promise<void> { await this.expectText("First name must be less than 50 characters"); }
+  async verifyPasswordRequired(): Promise<void> {
+    await this.expectText("Password is required");
+  }
+  async verifyFirstNameTooLong(): Promise<void> {
+    await this.expectText("First name must be less than 50 characters");
+  }
   async verifyFirstNameContainingSpecialCharacters(): Promise<void> {
-    await this.expectText("The first name can only contain letters, periods, hyphens, and apostrophes.");
+    await this.expectText(
+      "The first name can only contain letters, periods, hyphens, and apostrophes."
+    );
   }
-  async verifyLastNameTooLong(): Promise<void> { await this.expectText("Last name must be less than 50 characters"); }
+  async verifyLastNameTooLong(): Promise<void> {
+    await this.expectText("Last name must be less than 50 characters");
+  }
   async verifyLastNameContainingSpecialCharacters(): Promise<void> {
-    await this.expectText("The last name can only contain letters, periods, hyphens, and apostrophes.");
+    await this.expectText(
+      "The last name can only contain letters, periods, hyphens, and apostrophes."
+    );
   }
-  async verifyTitleTooLong(): Promise<void> { await this.expectText("Title must be less than 255 characters"); }
-  async verifyConfirmPasswordRequired(): Promise<void> { await this.expectText("Confirm password is required"); }
+  async verifyTitleTooLong(): Promise<void> {
+    await this.expectText("Title must be less than 255 characters");
+  }
+  async verifyConfirmPasswordRequired(): Promise<void> {
+    await this.expectText("Confirm password is required");
+  }
   async verifyUserWithUnicodeCharacters(): Promise<void> {
     await this.expectText("Username can only contain letters, numbers and underscores");
   }
-  async verifyPasswordMismatch(): Promise<void> { await this.expectText("Password and confirm password must be the same"); }
+  async verifyPasswordMismatch(): Promise<void> {
+    await this.expectText("Password and confirm password must be the same");
+  }
 
   async verifyInvalidEmailFormat(): Promise<void> {
     await expect(this.page.locator('input[type="email"]')).toHaveJSProperty(
@@ -298,27 +378,51 @@ export class UserPage extends BasePage {
     );
   }
 
-  async verifyUsernameTooShort(): Promise<void> { await this.expectText("Username must be at least 4 characters"); }
-  async verifyUsernameTooLong(): Promise<void> { await this.expectText("Username must be less than 64 characters"); }
-  async verifyPasswordTooShort(): Promise<void> { await this.expectText("Password must be at least 12 characters long."); }
-  async verifyPasswordMissingNumber(): Promise<void> { await this.expectText("Password must contain at least one number"); }
-  async verifyPasswordMissingSpecialChar(): Promise<void> { await this.expectText("Password must contain at least one special character"); }
-  async verifyPasswordMissingUppercase(): Promise<void> { await this.expectText("Password must contain at least one uppercase letter"); }
-  async verifyDuplicateUsername(): Promise<void> { await this.expectText("This username is already in use"); }
-  async verifyDuplicateEmail(): Promise<void> { await this.expectText("This email is already in use"); }
-  async verifyClearAllPermissions(): Promise<void> { await this.expectText("At least one permission is required"); }
+  async verifyUsernameTooShort(): Promise<void> {
+    await this.expectText("Username must be at least 4 characters");
+  }
+  async verifyUsernameTooLong(): Promise<void> {
+    await this.expectText("Username must be less than 64 characters");
+  }
+  async verifyPasswordTooShort(): Promise<void> {
+    await this.expectText("Password must be at least 12 characters long.");
+  }
+  async verifyPasswordMissingNumber(): Promise<void> {
+    await this.expectText("Password must contain at least one number");
+  }
+  async verifyPasswordMissingSpecialChar(): Promise<void> {
+    await this.expectText("Password must contain at least one special character");
+  }
+  async verifyPasswordMissingUppercase(): Promise<void> {
+    await this.expectText("Password must contain at least one uppercase letter");
+  }
+  async verifyDuplicateUsername(): Promise<void> {
+    await this.expectText("This username is already in use");
+  }
+  async verifyDuplicateEmail(): Promise<void> {
+    await this.expectText("This email is already in use");
+  }
+  async verifyClearAllPermissions(): Promise<void> {
+    await this.expectText("At least one permission is required");
+  }
   async verifyInvalidUsernameFormat(): Promise<void> {
     await this.expectText("Username can only contain letters, numbers, ., -, +, _, and @");
   }
-  async verifyUsernameRequired(): Promise<void> { await this.expectText("Username is required"); }
-  async verifyUsernameWhitespace(): Promise<void> { await this.expectText("Username is required"); }
+  async verifyUsernameRequired(): Promise<void> {
+    await this.expectText("Username is required");
+  }
+  async verifyUsernameWhitespace(): Promise<void> {
+    await this.expectText("Username is required");
+  }
 
   async editUserSuccess(): Promise<void> {
     await expect(this.page.locator('[data-sonner-toast][data-type="success"]')).toBeVisible();
   }
 
   async verifyActionSuccess(expectedMessage: string): Promise<void> {
-    await expect(this.page.locator('[data-sonner-toast][data-type="success"]')).toContainText(expectedMessage);
+    await expect(this.page.locator('[data-sonner-toast][data-type="success"]')).toContainText(
+      expectedMessage
+    );
   }
 
   async verifyUpdateSuccess(): Promise<void> {

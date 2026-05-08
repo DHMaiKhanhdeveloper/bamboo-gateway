@@ -43,8 +43,12 @@ export class UserManager {
     return this.users.filter((u) => u.username.includes(pattern));
   }
 
-  static getMerchantUsers(): TestUser[] { return this.getUsersByPattern("merchant"); }
-  static getMasterMerchantUsers(): TestUser[] { return this.getUsersByPattern("master_merchant"); }
+  static getMerchantUsers(): TestUser[] {
+    return this.getUsersByPattern("merchant");
+  }
+  static getMasterMerchantUsers(): TestUser[] {
+    return this.getUsersByPattern("master_merchant");
+  }
 
   static getUserCredentials(username?: string): {
     username: string;
@@ -59,9 +63,15 @@ export class UserManager {
     };
   }
 
-  static getAllUsers(): TestUser[] { return this.users; }
-  static getAllUsernames(): string[] { return this.users.map((u) => u.username); }
-  static validateUser(username: string): boolean { return this.getUserByUsername(username) !== undefined; }
+  static getAllUsers(): TestUser[] {
+    return this.users;
+  }
+  static getAllUsernames(): string[] {
+    return this.users.map((u) => u.username);
+  }
+  static validateUser(username: string): boolean {
+    return this.getUserByUsername(username) !== undefined;
+  }
 
   static getRandomUser(): TestUser {
     const idx = Math.floor(Math.random() * this.users.length);

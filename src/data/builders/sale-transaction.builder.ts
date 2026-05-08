@@ -86,28 +86,58 @@ export class SaleTransactionBuilder {
 
   constructor(private readonly amount: string) {}
 
-  asCash(): this { this.paymentType = "Cash"; return this; }
+  asCash(): this {
+    this.paymentType = "Cash";
+    return this;
+  }
 
-  withCard(card: CardData): this { this.cardData = card; return this; }
-  withDefaultCard(): this { this.cardData = generateDefaultCardData(); return this; }
+  withCard(card: CardData): this {
+    this.cardData = card;
+    return this;
+  }
+  withDefaultCard(): this {
+    this.cardData = generateDefaultCardData();
+    return this;
+  }
 
-  withCardHolder(holder: CardHolderData): this { this.cardHolderData = holder; return this; }
-  withDefaultCardHolder(): this { this.cardHolderData = generateDefaultCardHolderData(); return this; }
+  withCardHolder(holder: CardHolderData): this {
+    this.cardHolderData = holder;
+    return this;
+  }
+  withDefaultCardHolder(): this {
+    this.cardHolderData = generateDefaultCardHolderData();
+    return this;
+  }
 
-  withAmount(data: AmountData): this { this.amountData = data; return this; }
+  withAmount(data: AmountData): this {
+    this.amountData = data;
+    return this;
+  }
 
   withMerchantDefinedFields(fields: MerchantDefinedField[]): this {
     this.merchantDefinedFields = fields;
     return this;
   }
 
-  withOrderItems(items: OrderItem[]): this { this.orderItems = items; return this; }
+  withOrderItems(items: OrderItem[]): this {
+    this.orderItems = items;
+    return this;
+  }
 
-  withAuthOnly(authOnly = true): this { this.authOnly = authOnly; return this; }
+  withAuthOnly(authOnly = true): this {
+    this.authOnly = authOnly;
+    return this;
+  }
 
-  withRequestId(id: string): this { this.requestId = id; return this; }
+  withRequestId(id: string): this {
+    this.requestId = id;
+    return this;
+  }
 
-  withIndustryCode(code: string): this { this.industryCode = code; return this; }
+  withIndustryCode(code: string): this {
+    this.industryCode = code;
+    return this;
+  }
 
   build(): SaleTransactionPayload {
     const payload: SaleTransactionPayload = {

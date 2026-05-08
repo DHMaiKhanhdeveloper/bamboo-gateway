@@ -114,14 +114,22 @@ export interface AddNewProductData extends ProductBasicInfoData {
  * `flows/*.flow.ts` without breaking existing test imports.
  */
 export class VirtualTerminalPage extends BasePage {
-  protected override get urlPath(): string { return "/virtual-terminal"; }
-  protected override readyLocator(): Locator { return this.virtualTerminalHeading; }
+  protected override get urlPath(): string {
+    return "/virtual-terminal";
+  }
+  protected override readyLocator(): Locator {
+    return this.virtualTerminalHeading;
+  }
 
   // ===========================================================================
   // Navigation
   // ===========================================================================
   override async goto(merchantIdOrQuery: string = ""): Promise<null> {
-    if (merchantIdOrQuery && !merchantIdOrQuery.startsWith("?") && !merchantIdOrQuery.startsWith("/")) {
+    if (
+      merchantIdOrQuery &&
+      !merchantIdOrQuery.startsWith("?") &&
+      !merchantIdOrQuery.startsWith("/")
+    ) {
       await this.page.goto(`/${merchantIdOrQuery}/virtual-terminal`);
     } else {
       await this.page.goto(`/virtual-terminal${merchantIdOrQuery}`);
@@ -145,77 +153,196 @@ export class VirtualTerminalPage extends BasePage {
     await expect(this.virtualTerminalHeading).toBeVisible();
   }
 
-  async gotoWithMerchant(merchantId: string): Promise<void> { await this.gotoSaleMode(merchantId.replace("?type=sale", "")); }
-  async gotoSaleModeWithMerchant(merchantId: string): Promise<void> { await this.gotoSaleMode(merchantId); }
-  async gotoAuthModeWithMerchant(merchantId: string): Promise<void> { await this.gotoAuthMode(merchantId); }
-  async gotoReturnModeWithMerchant(merchantId: string): Promise<void> { await this.gotoReturnMode(merchantId); }
+  async gotoWithMerchant(merchantId: string): Promise<void> {
+    await this.gotoSaleMode(merchantId.replace("?type=sale", ""));
+  }
+  async gotoSaleModeWithMerchant(merchantId: string): Promise<void> {
+    await this.gotoSaleMode(merchantId);
+  }
+  async gotoAuthModeWithMerchant(merchantId: string): Promise<void> {
+    await this.gotoAuthMode(merchantId);
+  }
+  async gotoReturnModeWithMerchant(merchantId: string): Promise<void> {
+    await this.gotoReturnMode(merchantId);
+  }
 
   // ===========================================================================
   // Headings & transaction type radios
   // ===========================================================================
-  get virtualTerminalHeading(): Locator { return this.page.getByRole("heading", { name: "Virtual Terminal" }); }
-  get saleRadio(): Locator { return this.page.getByTestId("transaction-type-sale-radio"); }
-  get saleLabel(): Locator { return this.page.getByTestId("transaction-type-sale-label"); }
-  get authorizePaymentRadio(): Locator { return this.page.getByTestId("transaction-type-auth-radio"); }
-  get authorizePaymentLabel(): Locator { return this.page.getByTestId("transaction-type-auth-label"); }
-  get returnRadio(): Locator { return this.page.getByTestId("transaction-type-return-radio"); }
-  get returnLabel(): Locator { return this.page.getByTestId("transaction-type-return-label"); }
+  get virtualTerminalHeading(): Locator {
+    return this.page.getByRole("heading", { name: "Virtual Terminal" });
+  }
+  get saleRadio(): Locator {
+    return this.page.getByTestId("transaction-type-sale-radio");
+  }
+  get saleLabel(): Locator {
+    return this.page.getByTestId("transaction-type-sale-label");
+  }
+  get authorizePaymentRadio(): Locator {
+    return this.page.getByTestId("transaction-type-auth-radio");
+  }
+  get authorizePaymentLabel(): Locator {
+    return this.page.getByTestId("transaction-type-auth-label");
+  }
+  get returnRadio(): Locator {
+    return this.page.getByTestId("transaction-type-return-radio");
+  }
+  get returnLabel(): Locator {
+    return this.page.getByTestId("transaction-type-return-label");
+  }
 
   // ===========================================================================
   // Customer
   // ===========================================================================
-  get customerSelect(): Locator { return this.page.getByTestId("customer-selector"); }
-  get customerSearchInput(): Locator { return this.page.getByPlaceholder("Search..."); }
-  get addNewCustomerOption(): Locator { return this.page.getByText("Add new customer"); }
+  get customerSelect(): Locator {
+    return this.page.getByTestId("customer-selector");
+  }
+  get customerSearchInput(): Locator {
+    return this.page.getByPlaceholder("Search...");
+  }
+  get addNewCustomerOption(): Locator {
+    return this.page.getByText("Add new customer");
+  }
   get removeCustomerButton(): Locator {
-    return this.page.getByRole("button").filter({ has: this.page.locator('[data-testid="remove-customer"]') });
+    return this.page
+      .getByRole("button")
+      .filter({ has: this.page.locator('[data-testid="remove-customer"]') });
   }
 
-  get newCustomerCustomerId(): Locator { return this.page.getByTestId("add-customer-customer-id-input"); }
-  get newCustomerFirstName(): Locator { return this.page.getByTestId("add-customer-first-name-input"); }
-  get newCustomerLastName(): Locator { return this.page.getByTestId("add-customer-last-name-input"); }
-  get newCustomerDescription(): Locator { return this.page.getByTestId("add-customer-description-textarea"); }
-  get newCustomerCardNumber(): Locator { return this.page.getByTestId("add-customer-card-number-input"); }
-  get newCustomerExpiryMonth(): Locator { return this.page.getByTestId("add-customer-exp-month-input"); }
-  get newCustomerExpiryYear(): Locator { return this.page.getByTestId("add-customer-exp-year-input"); }
-  get newCustomerCVV(): Locator { return this.page.getByTestId("add-customer-cvv-input"); }
-  get newCustomerBillingFirstName(): Locator { return this.page.getByTestId("add-customer-billing-first-name-input"); }
-  get newCustomerBillingLastName(): Locator { return this.page.getByTestId("add-customer-billing-last-name-input"); }
-  get newCustomerBillingPhone(): Locator { return this.page.getByTestId("add-customer-billing-phone-input"); }
-  get newCustomerBillingEmail(): Locator { return this.page.getByTestId("add-customer-billing-email-input"); }
-  get newCustomerBillingCompany(): Locator { return this.page.getByTestId("add-customer-billing-company-input"); }
-  get newCustomerBillingAddress1(): Locator { return this.page.getByTestId("add-customer-billing-address1-input"); }
-  get newCustomerBillingAddress2(): Locator { return this.page.getByTestId("add-customer-billing-address2-input"); }
-  get newCustomerBillingCountry(): Locator { return this.page.getByTestId("add-customer-billing-country-select"); }
-  get newCustomerBillingCity(): Locator { return this.page.getByTestId("add-customer-billing-city-input"); }
-  get newCustomerBillingState(): Locator { return this.page.getByTestId("add-customer-billing-state-select"); }
-  get newCustomerBillingZip(): Locator { return this.page.getByTestId("add-customer-billing-zip-input"); }
-  get newCustomerShippingFirstName(): Locator { return this.page.getByTestId("add-customer-shipping-first-name-input"); }
-  get newCustomerShippingLastName(): Locator { return this.page.getByTestId("add-customer-shipping-last-name-input"); }
-  get newCustomerShippingPhone(): Locator { return this.page.getByTestId("add-customer-shipping-phone-input"); }
-  get newCustomerShippingEmail(): Locator { return this.page.getByTestId("add-customer-shipping-email-input"); }
-  get newCustomerShippingCompany(): Locator { return this.page.getByTestId("add-customer-shipping-company-input"); }
-  get newCustomerShippingAddress1(): Locator { return this.page.getByTestId("add-customer-shipping-address1-input"); }
-  get newCustomerShippingAddress2(): Locator { return this.page.getByTestId("add-customer-shipping-address2-input"); }
-  get newCustomerShippingCountry(): Locator { return this.page.getByTestId("add-customer-shipping-country-select"); }
-  get newCustomerShippingCity(): Locator { return this.page.getByTestId("add-customer-shipping-city-input"); }
-  get newCustomerShippingState(): Locator { return this.page.getByTestId("add-customer-shipping-state-select"); }
-  get newCustomerShippingZip(): Locator { return this.page.getByTestId("add-customer-shipping-zip-input"); }
-  get addCustomerButton(): Locator { return this.page.getByTestId("add-customer-submit-button"); }
+  get newCustomerCustomerId(): Locator {
+    return this.page.getByTestId("add-customer-customer-id-input");
+  }
+  get newCustomerFirstName(): Locator {
+    return this.page.getByTestId("add-customer-first-name-input");
+  }
+  get newCustomerLastName(): Locator {
+    return this.page.getByTestId("add-customer-last-name-input");
+  }
+  get newCustomerDescription(): Locator {
+    return this.page.getByTestId("add-customer-description-textarea");
+  }
+  get newCustomerCardNumber(): Locator {
+    return this.page.getByTestId("add-customer-card-number-input");
+  }
+  get newCustomerExpiryMonth(): Locator {
+    return this.page.getByTestId("add-customer-exp-month-input");
+  }
+  get newCustomerExpiryYear(): Locator {
+    return this.page.getByTestId("add-customer-exp-year-input");
+  }
+  get newCustomerCVV(): Locator {
+    return this.page.getByTestId("add-customer-cvv-input");
+  }
+  get newCustomerBillingFirstName(): Locator {
+    return this.page.getByTestId("add-customer-billing-first-name-input");
+  }
+  get newCustomerBillingLastName(): Locator {
+    return this.page.getByTestId("add-customer-billing-last-name-input");
+  }
+  get newCustomerBillingPhone(): Locator {
+    return this.page.getByTestId("add-customer-billing-phone-input");
+  }
+  get newCustomerBillingEmail(): Locator {
+    return this.page.getByTestId("add-customer-billing-email-input");
+  }
+  get newCustomerBillingCompany(): Locator {
+    return this.page.getByTestId("add-customer-billing-company-input");
+  }
+  get newCustomerBillingAddress1(): Locator {
+    return this.page.getByTestId("add-customer-billing-address1-input");
+  }
+  get newCustomerBillingAddress2(): Locator {
+    return this.page.getByTestId("add-customer-billing-address2-input");
+  }
+  get newCustomerBillingCountry(): Locator {
+    return this.page.getByTestId("add-customer-billing-country-select");
+  }
+  get newCustomerBillingCity(): Locator {
+    return this.page.getByTestId("add-customer-billing-city-input");
+  }
+  get newCustomerBillingState(): Locator {
+    return this.page.getByTestId("add-customer-billing-state-select");
+  }
+  get newCustomerBillingZip(): Locator {
+    return this.page.getByTestId("add-customer-billing-zip-input");
+  }
+  get newCustomerShippingFirstName(): Locator {
+    return this.page.getByTestId("add-customer-shipping-first-name-input");
+  }
+  get newCustomerShippingLastName(): Locator {
+    return this.page.getByTestId("add-customer-shipping-last-name-input");
+  }
+  get newCustomerShippingPhone(): Locator {
+    return this.page.getByTestId("add-customer-shipping-phone-input");
+  }
+  get newCustomerShippingEmail(): Locator {
+    return this.page.getByTestId("add-customer-shipping-email-input");
+  }
+  get newCustomerShippingCompany(): Locator {
+    return this.page.getByTestId("add-customer-shipping-company-input");
+  }
+  get newCustomerShippingAddress1(): Locator {
+    return this.page.getByTestId("add-customer-shipping-address1-input");
+  }
+  get newCustomerShippingAddress2(): Locator {
+    return this.page.getByTestId("add-customer-shipping-address2-input");
+  }
+  get newCustomerShippingCountry(): Locator {
+    return this.page.getByTestId("add-customer-shipping-country-select");
+  }
+  get newCustomerShippingCity(): Locator {
+    return this.page.getByTestId("add-customer-shipping-city-input");
+  }
+  get newCustomerShippingState(): Locator {
+    return this.page.getByTestId("add-customer-shipping-state-select");
+  }
+  get newCustomerShippingZip(): Locator {
+    return this.page.getByTestId("add-customer-shipping-zip-input");
+  }
+  get addCustomerButton(): Locator {
+    return this.page.getByTestId("add-customer-submit-button");
+  }
 
   // ===========================================================================
   // Payment detail
   // ===========================================================================
-  get manualAmountEntryRadio(): Locator { return this.page.getByRole("group").filter({ hasText: /^Manual Amount Entry$/ }); }
-  get selectProductsRadio(): Locator { return this.page.getByRole("group").filter({ hasText: /^Select Products$/ }); }
-  get amountInput(): Locator { return this.page.getByTestId("amount-subTotal-input"); }
-  get subtotalDisplay(): Locator { return this.page.getByText(/Subtotal/).locator("..").getByText(/\$/); }
-  get discountDisplay(): Locator { return this.page.getByText(/Discount/).locator("..").getByText(/\$/); }
-  get taxDisplay(): Locator { return this.page.getByText(/Tax/).locator("..").getByText(/\$/); }
-  get totalAmountDisplay(): Locator { return this.page.getByText(/Total Amount/).locator("..").getByText(/\$/); }
+  get manualAmountEntryRadio(): Locator {
+    return this.page.getByRole("group").filter({ hasText: /^Manual Amount Entry$/ });
+  }
+  get selectProductsRadio(): Locator {
+    return this.page.getByRole("group").filter({ hasText: /^Select Products$/ });
+  }
+  get amountInput(): Locator {
+    return this.page.getByTestId("amount-subTotal-input");
+  }
+  get subtotalDisplay(): Locator {
+    return this.page
+      .getByText(/Subtotal/)
+      .locator("..")
+      .getByText(/\$/);
+  }
+  get discountDisplay(): Locator {
+    return this.page
+      .getByText(/Discount/)
+      .locator("..")
+      .getByText(/\$/);
+  }
+  get taxDisplay(): Locator {
+    return this.page.getByText(/Tax/).locator("..").getByText(/\$/);
+  }
+  get totalAmountDisplay(): Locator {
+    return this.page
+      .getByText(/Total Amount/)
+      .locator("..")
+      .getByText(/\$/);
+  }
 
-  get productSearchInput(): Locator { return this.page.getByTestId("product-search-input"); }
-  get addNewProductOption(): Locator { return this.page.getByText("Add new product"); }
+  get productSearchInput(): Locator {
+    return this.page.getByTestId("product-search-input");
+  }
+  get addNewProductOption(): Locator {
+    return this.page.getByText("Add new product");
+  }
 
   // ===========================================================================
   // Payment methods
@@ -230,72 +357,170 @@ export class VirtualTerminalPage extends BasePage {
     return this.page.getByRole("group").filter({ hasText: "Cash" }).nth(1);
   }
 
-  get cardNumberInput(): Locator { return this.page.getByTestId("card-number-input"); }
-  get expiryDateInput(): Locator { return this.page.getByTestId("expiry-date-input"); }
-  get cvvInput(): Locator { return this.page.getByTestId("cvv-input"); }
-  get cashReceivedInput(): Locator { return this.page.getByLabel(/Cash Received.*\*/); }
+  get cardNumberInput(): Locator {
+    return this.page.getByTestId("card-number-input");
+  }
+  get expiryDateInput(): Locator {
+    return this.page.getByTestId("expiry-date-input");
+  }
+  get cvvInput(): Locator {
+    return this.page.getByTestId("cvv-input");
+  }
+  get cashReceivedInput(): Locator {
+    return this.page.getByLabel(/Cash Received.*\*/);
+  }
 
   // Billing
-  get addBillingButton(): Locator { return this.page.getByRole("button", { name: "Add Billing" }); }
-  get hideBillingButton(): Locator { return this.page.getByRole("button", { name: "Hide Billing" }); }
-  get billingFirstName(): Locator { return this.page.getByTestId("billing-section").getByLabel("First Name"); }
-  get billingLastName(): Locator { return this.page.getByTestId("billing-section").getByLabel("Last Name"); }
-  get billingAddress1(): Locator { return this.page.getByTestId("billing-section").getByLabel("Address 1"); }
-  get billingAddress2(): Locator { return this.page.getByTestId("billing-section").getByLabel("Address 2"); }
-  get billingCity(): Locator { return this.page.getByTestId("billing-section").getByLabel("City"); }
-  get billingState(): Locator { return this.page.getByTestId("billing-section").getByLabel("State/Province"); }
-  get billingZip(): Locator { return this.page.getByTestId("billing-section").getByLabel("ZIP/Postal Code"); }
-  get billingCountry(): Locator { return this.page.getByTestId("billing-section").getByLabel("Country"); }
-  get billingCompany(): Locator { return this.page.getByTestId("billing-section").getByLabel("Company"); }
+  get addBillingButton(): Locator {
+    return this.page.getByRole("button", { name: "Add Billing" });
+  }
+  get hideBillingButton(): Locator {
+    return this.page.getByRole("button", { name: "Hide Billing" });
+  }
+  get billingFirstName(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("First Name");
+  }
+  get billingLastName(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("Last Name");
+  }
+  get billingAddress1(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("Address 1");
+  }
+  get billingAddress2(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("Address 2");
+  }
+  get billingCity(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("City");
+  }
+  get billingState(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("State/Province");
+  }
+  get billingZip(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("ZIP/Postal Code");
+  }
+  get billingCountry(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("Country");
+  }
+  get billingCompany(): Locator {
+    return this.page.getByTestId("billing-section").getByLabel("Company");
+  }
 
   // MDF
   get merchantDefinedFieldsButton(): Locator {
     return this.page.getByRole("button").filter({ hasText: "Merchant Defined Fields" });
   }
-  get mdfFieldA(): Locator { return this.page.getByLabel("A"); }
-  get mdfFieldBCheckbox(): Locator { return this.page.getByLabel("B"); }
-  get mdfFieldCRadio(): Locator { return this.page.getByLabel("C").first(); }
-  get mdfFieldDSelect(): Locator { return this.page.getByLabel("D"); }
+  get mdfFieldA(): Locator {
+    return this.page.getByLabel("A");
+  }
+  get mdfFieldBCheckbox(): Locator {
+    return this.page.getByLabel("B");
+  }
+  get mdfFieldCRadio(): Locator {
+    return this.page.getByLabel("C").first();
+  }
+  get mdfFieldDSelect(): Locator {
+    return this.page.getByLabel("D");
+  }
 
   // Buttons
-  get processPaymentButton(): Locator { return this.page.getByTestId("submit-payment-button"); }
-  get confirmSaleButton(): Locator { return this.page.getByRole("button", { name: "Process Sale" }); }
-  get confirmAuthButton(): Locator { return this.page.getByRole("button", { name: "Process Authorization" }); }
-  get confirmReturnButton(): Locator { return this.page.getByRole("button", { name: "Process Return" }); }
-  get confirmPaymentButton(): Locator { return this.page.getByRole("button", { name: "Process Payment" }); }
-  get cancelButton(): Locator { return this.page.getByRole("button", { name: "Cancel" }); }
+  get processPaymentButton(): Locator {
+    return this.page.getByTestId("submit-payment-button");
+  }
+  get confirmSaleButton(): Locator {
+    return this.page.getByRole("button", { name: "Process Sale" });
+  }
+  get confirmAuthButton(): Locator {
+    return this.page.getByRole("button", { name: "Process Authorization" });
+  }
+  get confirmReturnButton(): Locator {
+    return this.page.getByRole("button", { name: "Process Return" });
+  }
+  get confirmPaymentButton(): Locator {
+    return this.page.getByRole("button", { name: "Process Payment" });
+  }
+  get cancelButton(): Locator {
+    return this.page.getByRole("button", { name: "Cancel" });
+  }
 
   // Add new product locators
-  get addNewProductOptionButton(): Locator { return this.page.getByTestId("add-new-product-option"); }
-  get productNameInput(): Locator { return this.page.getByTestId("product-name-input"); }
-  get productCategorySelect(): Locator { return this.page.getByTestId("product-category-select"); }
-  get addCategoryButton(): Locator { return this.page.getByTestId("add-category-button"); }
-  get productDescriptionTextarea(): Locator { return this.page.getByTestId("product-description-textarea"); }
-  get productSkuInput(): Locator { return this.page.getByTestId("product-sku-input"); }
-  get productUpcInput(): Locator { return this.page.getByTestId("product-upc-input"); }
-  get productCommodityCodeSelect(): Locator { return this.page.getByTestId("product-commodity-code-select"); }
-  get productUnitSelect(): Locator { return this.page.getByTestId("product-unit-select"); }
-  get productSubmitButton(): Locator { return this.page.getByTestId("product-submit-button"); }
+  get addNewProductOptionButton(): Locator {
+    return this.page.getByTestId("add-new-product-option");
+  }
+  get productNameInput(): Locator {
+    return this.page.getByTestId("product-name-input");
+  }
+  get productCategorySelect(): Locator {
+    return this.page.getByTestId("product-category-select");
+  }
+  get addCategoryButton(): Locator {
+    return this.page.getByTestId("add-category-button");
+  }
+  get productDescriptionTextarea(): Locator {
+    return this.page.getByTestId("product-description-textarea");
+  }
+  get productSkuInput(): Locator {
+    return this.page.getByTestId("product-sku-input");
+  }
+  get productUpcInput(): Locator {
+    return this.page.getByTestId("product-upc-input");
+  }
+  get productCommodityCodeSelect(): Locator {
+    return this.page.getByTestId("product-commodity-code-select");
+  }
+  get productUnitSelect(): Locator {
+    return this.page.getByTestId("product-unit-select");
+  }
+  get productSubmitButton(): Locator {
+    return this.page.getByTestId("product-submit-button");
+  }
 
-  getProductLocationSelect(i: number): Locator { return this.page.getByTestId(`product-location-select-${i}`); }
-  getProductLocationCostInput(i: number): Locator { return this.page.getByTestId(`product-location-cost-input-${i}`); }
-  getProductLocationPriceInput(i: number): Locator { return this.page.getByTestId(`product-location-price-input-${i}`); }
-  getProductLocationTaxRateInput(i: number): Locator { return this.page.getByTestId(`product-location-tax-rate-input-${i}`); }
-  getProductLocationDiscountInput(i: number): Locator { return this.page.getByTestId(`product-location-discount-input-${i}`); }
-  getProductLocationDiscountRateInput(i: number): Locator { return this.page.getByTestId(`product-location-discount-rate-input-${i}`); }
-  getProductLocationNonInventoryCheckbox(i: number): Locator { return this.page.getByTestId(`product-location-non-inventory-checkbox-${i}`); }
-  getProductLocationOnHandInput(i: number): Locator { return this.page.getByTestId(`product-location-on-hand-input-${i}`); }
-  getProductLocationOnOrderInput(i: number): Locator { return this.page.getByTestId(`product-location-on-order-input-${i}`); }
-  getProductLocationAlertLevelInput(i: number): Locator { return this.page.getByTestId(`product-location-alert-level-input-${i}`); }
-  getProductLocationRow(i: number): Locator { return this.page.getByTestId(`product-location-row-${i}`); }
+  getProductLocationSelect(i: number): Locator {
+    return this.page.getByTestId(`product-location-select-${i}`);
+  }
+  getProductLocationCostInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-cost-input-${i}`);
+  }
+  getProductLocationPriceInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-price-input-${i}`);
+  }
+  getProductLocationTaxRateInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-tax-rate-input-${i}`);
+  }
+  getProductLocationDiscountInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-discount-input-${i}`);
+  }
+  getProductLocationDiscountRateInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-discount-rate-input-${i}`);
+  }
+  getProductLocationNonInventoryCheckbox(i: number): Locator {
+    return this.page.getByTestId(`product-location-non-inventory-checkbox-${i}`);
+  }
+  getProductLocationOnHandInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-on-hand-input-${i}`);
+  }
+  getProductLocationOnOrderInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-on-order-input-${i}`);
+  }
+  getProductLocationAlertLevelInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-alert-level-input-${i}`);
+  }
+  getProductLocationRow(i: number): Locator {
+    return this.page.getByTestId(`product-location-row-${i}`);
+  }
 
   getProductLocationDiscountTypeCombobox(i: number): Locator {
-    return this.getProductLocationRow(i).getByRole("combobox").filter({ hasText: /None|Amount|Percentage/i });
+    return this.getProductLocationRow(i)
+      .getByRole("combobox")
+      .filter({ hasText: /None|Amount|Percentage/i });
   }
 
   // Return form
-  get returnTransactionIdInput(): Locator { return this.page.getByLabel(/Transaction ID/); }
-  get returnAmountInput(): Locator { return this.page.getByLabel(/Amount to Refund/); }
+  get returnTransactionIdInput(): Locator {
+    return this.page.getByLabel(/Transaction ID/);
+  }
+  get returnAmountInput(): Locator {
+    return this.page.getByLabel(/Amount to Refund/);
+  }
 
   // ===========================================================================
   // Transaction type
@@ -363,7 +588,8 @@ export class VirtualTerminalPage extends BasePage {
     }
     if (data.billingZip) await this.newCustomerBillingZip.fill(data.billingZip);
 
-    if (data.shippingFirstName) await this.newCustomerShippingFirstName.fill(data.shippingFirstName);
+    if (data.shippingFirstName)
+      await this.newCustomerShippingFirstName.fill(data.shippingFirstName);
     if (data.shippingLastName) await this.newCustomerShippingLastName.fill(data.shippingLastName);
     if (data.shippingPhone) await this.newCustomerShippingPhone.fill(data.shippingPhone);
     if (data.shippingEmail) await this.newCustomerShippingEmail.fill(data.shippingEmail);
@@ -384,7 +610,9 @@ export class VirtualTerminalPage extends BasePage {
     await this.addCustomerButton.click();
   }
 
-  async removeCustomer(): Promise<void> { await this.removeCustomerButton.click(); }
+  async removeCustomer(): Promise<void> {
+    await this.removeCustomerButton.click();
+  }
 
   // ===========================================================================
   // Payment detail methods
@@ -474,14 +702,19 @@ export class VirtualTerminalPage extends BasePage {
         await checkbox.click();
       }
       if (data.inventory.enabled) {
-        if (data.inventory.onHand) await this.getProductLocationOnHandInput(index).fill(data.inventory.onHand);
-        if (data.inventory.onOrder) await this.getProductLocationOnOrderInput(index).fill(data.inventory.onOrder);
-        if (data.inventory.alertLevel) await this.getProductLocationAlertLevelInput(index).fill(data.inventory.alertLevel);
+        if (data.inventory.onHand)
+          await this.getProductLocationOnHandInput(index).fill(data.inventory.onHand);
+        if (data.inventory.onOrder)
+          await this.getProductLocationOnOrderInput(index).fill(data.inventory.onOrder);
+        if (data.inventory.alertLevel)
+          await this.getProductLocationAlertLevelInput(index).fill(data.inventory.alertLevel);
       }
     }
   }
 
-  async submitNewProduct(): Promise<void> { await this.productSubmitButton.click(); }
+  async submitNewProduct(): Promise<void> {
+    await this.productSubmitButton.click();
+  }
 
   async addNewProduct(data: AddNewProductData): Promise<void> {
     await this.openAddNewProductDialog();
@@ -538,7 +771,9 @@ export class VirtualTerminalPage extends BasePage {
     await this.cvvInput.fill(data.cvv);
   }
 
-  async enterCashReceived(amount: string): Promise<void> { await this.cashReceivedInput.fill(amount); }
+  async enterCashReceived(amount: string): Promise<void> {
+    await this.cashReceivedInput.fill(amount);
+  }
 
   // ===========================================================================
   // Billing
@@ -556,7 +791,9 @@ export class VirtualTerminalPage extends BasePage {
     if (data.company) await this.billingCompany.fill(data.company);
   }
 
-  async hideBillingAddress(): Promise<void> { await this.hideBillingButton.click(); }
+  async hideBillingAddress(): Promise<void> {
+    await this.hideBillingButton.click();
+  }
 
   // ===========================================================================
   // Merchant defined fields
@@ -612,10 +849,20 @@ export class VirtualTerminalPage extends BasePage {
   // ===========================================================================
   // Composite flows
   // ===========================================================================
-  async createSaleWithManualCard(data: { amount: string; cardNumber: string; expiryDate: string; cvv: string; customer?: string }): Promise<void> {
+  async createSaleWithManualCard(data: {
+    amount: string;
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+    customer?: string;
+  }): Promise<void> {
     if (data.customer) await this.selectExistingCustomer(data.customer);
     await this.enterAmount(data.amount);
-    await this.enterCardDetails({ cardNumber: data.cardNumber, expiryDate: data.expiryDate, cvv: data.cvv });
+    await this.enterCardDetails({
+      cardNumber: data.cardNumber,
+      expiryDate: data.expiryDate,
+      cvv: data.cvv,
+    });
     await this.processAndConfirm("sale");
   }
 
@@ -626,7 +873,11 @@ export class VirtualTerminalPage extends BasePage {
     await this.processAndConfirm("sale");
   }
 
-  async createCashSale(data: { customer?: string; amount: string; cashReceived: string }): Promise<void> {
+  async createCashSale(data: {
+    customer?: string;
+    amount: string;
+    cashReceived: string;
+  }): Promise<void> {
     if (data.customer) await this.selectExistingCustomer(data.customer);
     await this.enterAmount(data.amount);
     await this.selectPaymentMethod("cash");
@@ -634,11 +885,21 @@ export class VirtualTerminalPage extends BasePage {
     await this.processAndConfirm("sale");
   }
 
-  async createAuthWithManualCard(data: { amount: string; cardNumber: string; expiryDate: string; cvv: string; customer?: string }): Promise<void> {
+  async createAuthWithManualCard(data: {
+    amount: string;
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+    customer?: string;
+  }): Promise<void> {
     await this.selectTransactionType("auth");
     if (data.customer) await this.selectExistingCustomer(data.customer);
     await this.enterAmount(data.amount);
-    await this.enterCardDetails({ cardNumber: data.cardNumber, expiryDate: data.expiryDate, cvv: data.cvv });
+    await this.enterCardDetails({
+      cardNumber: data.cardNumber,
+      expiryDate: data.expiryDate,
+      cvv: data.cvv,
+    });
     await this.processAndConfirm("auth");
   }
 
@@ -650,11 +911,21 @@ export class VirtualTerminalPage extends BasePage {
     await this.processAndConfirm("auth");
   }
 
-  async createSaleWithProduct(data: { customer: string; productName: string; cardNumber: string; expiryDate: string; cvv: string }): Promise<void> {
+  async createSaleWithProduct(data: {
+    customer: string;
+    productName: string;
+    cardNumber: string;
+    expiryDate: string;
+    cvv: string;
+  }): Promise<void> {
     await this.selectExistingCustomer(data.customer);
     await this.selectPaymentDetailType("products");
     await this.selectProduct(data.productName);
-    await this.enterCardDetails({ cardNumber: data.cardNumber, expiryDate: data.expiryDate, cvv: data.cvv });
+    await this.enterCardDetails({
+      cardNumber: data.cardNumber,
+      expiryDate: data.expiryDate,
+      cvv: data.cvv,
+    });
     await this.processAndConfirm("sale");
   }
 
@@ -681,7 +952,9 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async verifyTransactionDetailPage(): Promise<void> {
-    await expect(this.page.locator("#content").getByRole("main").getByText("Transaction Detail")).toBeVisible();
+    await expect(
+      this.page.locator("#content").getByRole("main").getByText("Transaction Detail")
+    ).toBeVisible();
   }
 
   async verifyTransactionStatus(status: string): Promise<void> {
@@ -741,7 +1014,12 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async verifyPaymentType(type: string): Promise<void> {
-    await expect(this.page.getByText(/Payment type/).locator("..").getByText(type)).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/Payment type/)
+        .locator("..")
+        .getByText(type)
+    ).toBeVisible();
   }
 
   async verifyChangeAmount(change: string): Promise<void> {
@@ -749,43 +1027,104 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async verifyBillingAddress(data: {
-    firstName: string; lastName: string; address1: string; address2: string;
-    country: string; city: string; state: string; zip: string;
+    firstName: string;
+    lastName: string;
+    address1: string;
+    address2: string;
+    country: string;
+    city: string;
+    state: string;
+    zip: string;
   }): Promise<void> {
-    await expect(this.page.getByText(/First Name/).locator("..").getByText(data.firstName)).toBeVisible();
-    await expect(this.page.getByText(/Last Name/).locator("..").getByText(data.lastName)).toBeVisible();
-    await expect(this.page.getByText(/Address 1/).locator("..").getByText(data.address1)).toBeVisible();
-    await expect(this.page.getByText(/Address 2/).locator("..").getByText(data.address2)).toBeVisible();
-    await expect(this.page.getByText(/Country/).locator("..").getByText(data.country)).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/First Name/)
+        .locator("..")
+        .getByText(data.firstName)
+    ).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/Last Name/)
+        .locator("..")
+        .getByText(data.lastName)
+    ).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/Address 1/)
+        .locator("..")
+        .getByText(data.address1)
+    ).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/Address 2/)
+        .locator("..")
+        .getByText(data.address2)
+    ).toBeVisible();
+    await expect(
+      this.page
+        .getByText(/Country/)
+        .locator("..")
+        .getByText(data.country)
+    ).toBeVisible();
     await expect(this.page.getByText(/City/).locator("..").getByText(data.city)).toBeVisible();
     await expect(this.page.getByText(/State/).locator("..").getByText(data.state)).toBeVisible();
     await expect(this.page.getByText(/Zip/).locator("..").getByText(data.zip)).toBeVisible();
   }
 
-  async verifyMerchantDefinedFields(data: { fieldA?: string; fieldB?: string; fieldC?: string; fieldD?: string }): Promise<void> {
+  async verifyMerchantDefinedFields(data: {
+    fieldA?: string;
+    fieldB?: string;
+    fieldC?: string;
+    fieldD?: string;
+  }): Promise<void> {
     const mdf = this.page.getByRole("heading", { name: "Merchant Defined Fields" }).locator("..");
-    if (data.fieldA) await expect(mdf.getByText(/A/).locator("..").getByText(data.fieldA)).toBeVisible();
-    if (data.fieldB) await expect(mdf.getByText(/B/).locator("..").getByText(data.fieldB)).toBeVisible();
-    if (data.fieldC) await expect(mdf.getByText(/C/).locator("..").getByText(data.fieldC)).toBeVisible();
-    if (data.fieldD) await expect(mdf.getByText(/D/).locator("..").getByText(data.fieldD)).toBeVisible();
+    if (data.fieldA)
+      await expect(mdf.getByText(/A/).locator("..").getByText(data.fieldA)).toBeVisible();
+    if (data.fieldB)
+      await expect(mdf.getByText(/B/).locator("..").getByText(data.fieldB)).toBeVisible();
+    if (data.fieldC)
+      await expect(mdf.getByText(/C/).locator("..").getByText(data.fieldC)).toBeVisible();
+    if (data.fieldD)
+      await expect(mdf.getByText(/D/).locator("..").getByText(data.fieldD)).toBeVisible();
   }
 
   async verifyProductInCart(productName: string): Promise<void> {
     await expect(this.page.getByText(productName)).toBeVisible();
   }
 
-  async verifyProductPricing(data: { subtotal: string; discount?: string; tax: string; total: string }): Promise<void> {
-    await expect(this.page.getByText(/Subtotal/).locator("..").getByText(data.subtotal)).toBeVisible();
+  async verifyProductPricing(data: {
+    subtotal: string;
+    discount?: string;
+    tax: string;
+    total: string;
+  }): Promise<void> {
+    await expect(
+      this.page
+        .getByText(/Subtotal/)
+        .locator("..")
+        .getByText(data.subtotal)
+    ).toBeVisible();
     await expect(this.page.getByText(/Tax/).locator("..").getByText(data.tax)).toBeVisible();
     await expect(this.page.getByText(/Total/).locator("..").getByText(data.total)).toBeVisible();
     if (data.discount) {
-      await expect(this.page.getByText(/Discount/).locator("..").getByText(data.discount)).toBeVisible();
+      await expect(
+        this.page
+          .getByText(/Discount/)
+          .locator("..")
+          .getByText(data.discount)
+      ).toBeVisible();
     }
   }
 
-  async verifySavedCardEnabled(): Promise<void> { await expect(this.savedCardRadio).toBeEnabled(); }
-  async verifySavedCardDisabled(): Promise<void> { await expect(this.savedCardRadio).toBeDisabled(); }
-  async verifyCashPaymentNotAvailable(): Promise<void> { await expect(this.cashRadio).not.toBeVisible(); }
+  async verifySavedCardEnabled(): Promise<void> {
+    await expect(this.savedCardRadio).toBeEnabled();
+  }
+  async verifySavedCardDisabled(): Promise<void> {
+    await expect(this.savedCardRadio).toBeDisabled();
+  }
+  async verifyCashPaymentNotAvailable(): Promise<void> {
+    await expect(this.cashRadio).not.toBeVisible();
+  }
 
   async verifyAuthorizationCode(code: string): Promise<void> {
     await expect(this.page.getByTestId("authorization-code-value")).toContainText(code);
@@ -823,7 +1162,9 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async verifyInsufficientCash(): Promise<void> {
-    await expect(this.page.getByText(/Cash received must be equal to or greater than/)).toBeVisible();
+    await expect(
+      this.page.getByText(/Cash received must be equal to or greater than/)
+    ).toBeVisible();
   }
 
   async verifyTransactionNotFound(): Promise<void> {
@@ -835,7 +1176,9 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async verifyOverRefundError(): Promise<void> {
-    await expect(this.page.getByText(/Refund amount exceeds|must be less than or equal to/)).toBeVisible();
+    await expect(
+      this.page.getByText(/Refund amount exceeds|must be less than or equal to/)
+    ).toBeVisible();
   }
 
   async verifySKUTooLong(): Promise<void> {
@@ -876,7 +1219,11 @@ export class VirtualTerminalPage extends BasePage {
   }
 
   async getTransactionId(): Promise<string> {
-    const elem = this.page.getByText(/Transaction ID/).locator("..").locator("div").last();
+    const elem = this.page
+      .getByText(/Transaction ID/)
+      .locator("..")
+      .locator("div")
+      .last();
     return (await elem.textContent()) ?? "";
   }
 

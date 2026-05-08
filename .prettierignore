@@ -9,3 +9,5 @@ allure-report
 dist
 *.min.js
 package-lock.json
+dashboard
+docs

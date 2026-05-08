@@ -24,34 +24,80 @@ export class EmployeePage extends BasePage {
   // ---------------------------------------------------------------------------
   // Locators
   // ---------------------------------------------------------------------------
-  get createEmployeeText(): Locator { return this.page.getByText("Create Employee"); }
-  get listEmployeesText(): Locator { return this.page.getByText("Employees"); }
-  get nameInput(): Locator { return this.page.locator('input[data-testid="employee-name-input"]'); }
-  get emailInput(): Locator { return this.page.locator('input[data-testid="employee-email-input"]'); }
-  get phoneInput(): Locator { return this.page.locator('input[data-testid="employee-phone-input"]'); }
+  get createEmployeeText(): Locator {
+    return this.page.getByText("Create Employee");
+  }
+  get listEmployeesText(): Locator {
+    return this.page.getByText("Employees");
+  }
+  get nameInput(): Locator {
+    return this.page.locator('input[data-testid="employee-name-input"]');
+  }
+  get emailInput(): Locator {
+    return this.page.locator('input[data-testid="employee-email-input"]');
+  }
+  get phoneInput(): Locator {
+    return this.page.locator('input[data-testid="employee-phone-input"]');
+  }
   get countrySelector(): Locator {
     return this.page.locator("button").filter({ hasText: /\+/ }).first();
   }
-  get countrySearchInput(): Locator { return this.page.getByPlaceholder("Search country..."); }
-  get countryDropdown(): Locator { return this.page.locator('[role="listbox"]'); }
-  get roleSelect(): Locator { return this.page.getByTestId("employee-role-select"); }
-  get statusSelect(): Locator { return this.page.getByTestId("employee-status-select"); }
-  get passCodeInput(): Locator { return this.page.locator('input[data-testid="employee-passcode-input"]'); }
-  get createButton(): Locator { return this.page.getByRole("button", { name: "Create" }); }
+  get countrySearchInput(): Locator {
+    return this.page.getByPlaceholder("Search country...");
+  }
+  get countryDropdown(): Locator {
+    return this.page.locator('[role="listbox"]');
+  }
+  get roleSelect(): Locator {
+    return this.page.getByTestId("employee-role-select");
+  }
+  get statusSelect(): Locator {
+    return this.page.getByTestId("employee-status-select");
+  }
+  get passCodeInput(): Locator {
+    return this.page.locator('input[data-testid="employee-passcode-input"]');
+  }
+  get createButton(): Locator {
+    return this.page.getByRole("button", { name: "Create" });
+  }
 
   // Search-related locators
-  get employeeIDText(): Locator { return this.page.getByText("Employee ID").first(); }
-  get searchEmployeeID(): Locator { return this.page.getByPlaceholder("Search Employee ID").first(); }
-  get applyButton(): Locator { return this.page.getByRole("button", { name: "Apply" }); }
-  get employeeNameText(): Locator { return this.page.getByText("Name").first(); }
-  get placeholderSearchName(): Locator { return this.page.getByPlaceholder("Search name").first(); }
-  get employeeEmailText(): Locator { return this.page.getByText("Email").first(); }
-  get placeholderSearchEmail(): Locator { return this.page.getByPlaceholder("Search email").first(); }
-  get employeePhoneText(): Locator { return this.page.getByText("Phone").first(); }
-  get placeholderSearchPhone(): Locator { return this.page.getByPlaceholder("Search phone").first(); }
-  get employeeRoleText(): Locator { return this.page.getByText("Role").first(); }
-  get employeeStatusText(): Locator { return this.page.getByText("Status").first(); }
-  get employeeDateEnteredText(): Locator { return this.page.getByText("Date Entered").first(); }
+  get employeeIDText(): Locator {
+    return this.page.getByText("Employee ID").first();
+  }
+  get searchEmployeeID(): Locator {
+    return this.page.getByPlaceholder("Search Employee ID").first();
+  }
+  get applyButton(): Locator {
+    return this.page.getByRole("button", { name: "Apply" });
+  }
+  get employeeNameText(): Locator {
+    return this.page.getByText("Name").first();
+  }
+  get placeholderSearchName(): Locator {
+    return this.page.getByPlaceholder("Search name").first();
+  }
+  get employeeEmailText(): Locator {
+    return this.page.getByText("Email").first();
+  }
+  get placeholderSearchEmail(): Locator {
+    return this.page.getByPlaceholder("Search email").first();
+  }
+  get employeePhoneText(): Locator {
+    return this.page.getByText("Phone").first();
+  }
+  get placeholderSearchPhone(): Locator {
+    return this.page.getByPlaceholder("Search phone").first();
+  }
+  get employeeRoleText(): Locator {
+    return this.page.getByText("Role").first();
+  }
+  get employeeStatusText(): Locator {
+    return this.page.getByText("Status").first();
+  }
+  get employeeDateEnteredText(): Locator {
+    return this.page.getByText("Date Entered").first();
+  }
 
   getEmployeeRow(employeeId: string): Locator {
     return this.page.getByRole("row", { name: new RegExp(employeeId) });
@@ -61,8 +107,12 @@ export class EmployeePage extends BasePage {
     return this.page.locator("tr").filter({ hasText: name }).first();
   }
 
-  getRoleOption(role: string): Locator { return this.page.locator(`[data-value="${role}"]`); }
-  getStatusOption(status: string): Locator { return this.page.locator(`[data-value="${status}"]`); }
+  getRoleOption(role: string): Locator {
+    return this.page.locator(`[data-value="${role}"]`);
+  }
+  getStatusOption(status: string): Locator {
+    return this.page.locator(`[data-value="${status}"]`);
+  }
 
   getDateInputs(): Locator {
     return this.page.locator('[role="dialog"], .popup-container').getByRole("textbox");
@@ -92,10 +142,18 @@ export class EmployeePage extends BasePage {
   // ---------------------------------------------------------------------------
   // Field actions
   // ---------------------------------------------------------------------------
-  async fillName(name: string): Promise<void> { await this.nameInput.fill(name); }
-  async fillEmail(email: string): Promise<void> { await this.emailInput.fill(email); }
-  async fillPhone(phone: string): Promise<void> { await this.phoneInput.fill(phone); }
-  async fillPassCode(passCode: string): Promise<void> { await this.passCodeInput.fill(passCode); }
+  async fillName(name: string): Promise<void> {
+    await this.nameInput.fill(name);
+  }
+  async fillEmail(email: string): Promise<void> {
+    await this.emailInput.fill(email);
+  }
+  async fillPhone(phone: string): Promise<void> {
+    await this.phoneInput.fill(phone);
+  }
+  async fillPassCode(passCode: string): Promise<void> {
+    await this.passCodeInput.fill(passCode);
+  }
 
   async selectCountry(countryName: string): Promise<void> {
     try {
@@ -167,10 +225,18 @@ export class EmployeePage extends BasePage {
   // ---------------------------------------------------------------------------
   // Search methods
   // ---------------------------------------------------------------------------
-  async fillEmployeeId(id: string): Promise<void> { await this.searchEmployeeID.fill(id); }
-  async fillEmployeeName(name: string): Promise<void> { await this.placeholderSearchName.fill(name); }
-  async fillEmployeeEmail(email: string): Promise<void> { await this.placeholderSearchEmail.fill(email); }
-  async fillEmployeePhone(phone: string): Promise<void> { await this.placeholderSearchPhone.fill(phone); }
+  async fillEmployeeId(id: string): Promise<void> {
+    await this.searchEmployeeID.fill(id);
+  }
+  async fillEmployeeName(name: string): Promise<void> {
+    await this.placeholderSearchName.fill(name);
+  }
+  async fillEmployeeEmail(email: string): Promise<void> {
+    await this.placeholderSearchEmail.fill(email);
+  }
+  async fillEmployeePhone(phone: string): Promise<void> {
+    await this.placeholderSearchPhone.fill(phone);
+  }
 
   async selectRoleOption(role: string): Promise<void> {
     const opt = this.getRoleOption(role);
@@ -240,15 +306,16 @@ export class EmployeePage extends BasePage {
   // Verifications
   // ---------------------------------------------------------------------------
   async verifyActionSuccess(expectedMessage: string): Promise<void> {
-    await expect(
-      this.page.locator('[data-sonner-toast][data-type="success"]')
-    ).toContainText(expectedMessage, { timeout: 10_000 });
+    await expect(this.page.locator('[data-sonner-toast][data-type="success"]')).toContainText(
+      expectedMessage,
+      { timeout: 10_000 }
+    );
   }
 
   async verifyActionError(): Promise<void> {
-    await expect(
-      this.page.locator('[data-sonner-toast][data-type="error"]')
-    ).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.locator('[data-sonner-toast][data-type="error"]')).toBeVisible({
+      timeout: 10_000,
+    });
   }
 
   async verifySpecialCharactersInName(): Promise<void> {
@@ -257,7 +324,9 @@ export class EmployeePage extends BasePage {
   }
 
   async verifyNameTooLong(): Promise<void> {
-    await expect(this.page.locator(`text=Name is too long`).first()).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.locator(`text=Name is too long`).first()).toBeVisible({
+      timeout: 10_000,
+    });
   }
 
   async verifyFieldError(field: "name" | "email" | "phone" | "role" | "passcode"): Promise<void> {
@@ -280,7 +349,9 @@ export class EmployeePage extends BasePage {
       role: "Role is required",
       passcode: "Passcode is required",
     };
-    await expect(this.page.locator(`text=${errors[field]}`).first()).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.locator(`text=${errors[field]}`).first()).toBeVisible({
+      timeout: 10_000,
+    });
   }
 
   async verifyInvalidEmailFormat(): Promise<void> {
@@ -326,15 +397,15 @@ export class EmployeePage extends BasePage {
   }
 
   async verifyDoubleEmail(): Promise<void> {
-    await expect(
-      this.page.locator(`text=This email is already in use.`).first()
-    ).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.locator(`text=This email is already in use.`).first()).toBeVisible({
+      timeout: 10_000,
+    });
   }
 
   async verifyEmployeeInResults(name: string): Promise<void> {
-    await expect(
-      this.page.locator("tr").filter({ hasText: name }).first()
-    ).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.locator("tr").filter({ hasText: name }).first()).toBeVisible({
+      timeout: 10_000,
+    });
   }
 
   async verifyNoResultsFound(): Promise<void> {

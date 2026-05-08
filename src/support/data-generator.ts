@@ -6,30 +6,56 @@ export class DataGenerator {
   // ---------------------------------------------------------------------------
   // Card data
   // ---------------------------------------------------------------------------
-  static generateValidCardNumber(): string { return "4111111111111111"; }
-  static generateInvalidCardNumber(): string { return "4000000000009995"; }
-  static generateExpiredCardNumber(): string { return "4111111111111111"; }
-  static generateInsufficientFundsCardNumber(): string { return "4000000000000002"; }
+  static generateValidCardNumber(): string {
+    return "4111111111111111";
+  }
+  static generateInvalidCardNumber(): string {
+    return "4000000000009995";
+  }
+  static generateExpiredCardNumber(): string {
+    return "4111111111111111";
+  }
+  static generateInsufficientFundsCardNumber(): string {
+    return "4000000000000002";
+  }
 
   static generateValidExpDate(): string {
     const futureYear = new Date().getFullYear() + 2;
     return `12/${String(futureYear).slice(-2)}`;
   }
 
-  static generateExpiredExpDate(): string { return "01/20"; }
-  static generateInvalidExpDate(): string { return "13/34"; }
+  static generateExpiredExpDate(): string {
+    return "01/20";
+  }
+  static generateInvalidExpDate(): string {
+    return "13/34";
+  }
 
-  static generateValidCvv(): string { return "123"; }
-  static generateInvalidCvv(): string { return "999"; }
+  static generateValidCvv(): string {
+    return "123";
+  }
+  static generateInvalidCvv(): string {
+    return "999";
+  }
 
   // ---------------------------------------------------------------------------
   // Amounts
   // ---------------------------------------------------------------------------
-  static generateValidAmount(): string { return (Math.random() * 1000 + 10).toFixed(2); }
-  static generateZeroAmount(): string { return "0"; }
-  static generateHighAmount(): string { return "999999"; }
-  static generateDecimalAmount(): string { return "99.99"; }
-  static generateNegativeAmount(): string { return "-50.00"; }
+  static generateValidAmount(): string {
+    return (Math.random() * 1000 + 10).toFixed(2);
+  }
+  static generateZeroAmount(): string {
+    return "0";
+  }
+  static generateHighAmount(): string {
+    return "999999";
+  }
+  static generateDecimalAmount(): string {
+    return "99.99";
+  }
+  static generateNegativeAmount(): string {
+    return "-50.00";
+  }
 
   // ---------------------------------------------------------------------------
   // Users
@@ -83,8 +109,7 @@ export class DataGenerator {
         .substring(1, 4);
     const variantByte = ((random[2] ?? 0) & 0x3f) | 0x80;
     const part4 =
-      variantByte.toString(16).padStart(2, "0") +
-      ((random[3] ?? 0).toString(16)).padStart(2, "0");
+      variantByte.toString(16).padStart(2, "0") + (random[3] ?? 0).toString(16).padStart(2, "0");
     const part5 = Array.from(random.slice(4, 10))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
@@ -92,12 +117,19 @@ export class DataGenerator {
     return `${part1}-${part2}-${part3}-${part4}-${part5}`;
   }
 
-  static generateTerminalId(): string { return "0199195d-afb4-7f8f-b957-57a9ca76e7d9"; }
+  static generateTerminalId(): string {
+    return "0199195d-afb4-7f8f-b957-57a9ca76e7d9";
+  }
 
   // ---------------------------------------------------------------------------
   // Composite payment data
   // ---------------------------------------------------------------------------
-  static generateValidPaymentData(): { amount: string; cardNumber: string; expDate: string; cvv: string } {
+  static generateValidPaymentData(): {
+    amount: string;
+    cardNumber: string;
+    expDate: string;
+    cvv: string;
+  } {
     return {
       amount: this.generateValidAmount(),
       cardNumber: this.generateValidCardNumber(),
@@ -106,7 +138,12 @@ export class DataGenerator {
     };
   }
 
-  static generateInvalidPaymentData(): { amount: string; cardNumber: string; expDate: string; cvv: string } {
+  static generateInvalidPaymentData(): {
+    amount: string;
+    cardNumber: string;
+    expDate: string;
+    cvv: string;
+  } {
     return {
       amount: this.generateValidAmount(),
       cardNumber: this.generateInvalidCardNumber(),
@@ -115,7 +152,12 @@ export class DataGenerator {
     };
   }
 
-  static generateExpiredCardPaymentData(): { amount: string; cardNumber: string; expDate: string; cvv: string } {
+  static generateExpiredCardPaymentData(): {
+    amount: string;
+    cardNumber: string;
+    expDate: string;
+    cvv: string;
+  } {
     return {
       amount: this.generateValidAmount(),
       cardNumber: this.generateExpiredCardNumber(),
@@ -124,7 +166,12 @@ export class DataGenerator {
     };
   }
 
-  static generateInsufficientFundsPaymentData(): { amount: string; cardNumber: string; expDate: string; cvv: string } {
+  static generateInsufficientFundsPaymentData(): {
+    amount: string;
+    cardNumber: string;
+    expDate: string;
+    cvv: string;
+  } {
     return {
       amount: this.generateValidAmount(),
       cardNumber: this.generateInsufficientFundsCardNumber(),
@@ -144,7 +191,8 @@ export class DataGenerator {
   static generateRandomString(length: number): string {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
-    for (let i = 0; i < length; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (let i = 0; i < length; i++)
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
     return result;
   }
 

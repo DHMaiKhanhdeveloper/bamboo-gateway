@@ -61,7 +61,10 @@ export class AuthService {
       }
 
       // Step 4: Extract bearer token
-      const token = this.client.extractBearerToken(verifyRes, verifyBody as Record<string, unknown>);
+      const token = this.client.extractBearerToken(
+        verifyRes,
+        verifyBody as Record<string, unknown>
+      );
       if (!token) {
         return {
           success: false,

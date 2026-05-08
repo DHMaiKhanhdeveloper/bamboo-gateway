@@ -16,10 +16,22 @@ export interface DataFixtures {
 }
 
 export const dataTest = base.extend<DataFixtures>({
-  dataGenerator: async ({}, use) => { await use(DataGenerator); },
-  userManager: async ({}, use) => { await use(UserManager); },
-  cardFactory: async ({}, use) => { await use(CardFactory); },
-  customerFactory: async ({}, use) => { await use(CustomerFactory); },
-  merchantFactory: async ({}, use) => { await use(MerchantFactory); },
-  transactionFactory: async ({}, use) => { await use(TransactionFactory); },
+  dataGenerator: async ({}, use) => {
+    await use(DataGenerator);
+  },
+  userManager: async ({}, use) => {
+    await use(UserManager);
+  },
+  cardFactory: async ({}, use) => {
+    await use(CardFactory);
+  },
+  customerFactory: async ({}, use) => {
+    await use(CustomerFactory);
+  },
+  merchantFactory: async ({}, use) => {
+    await use(MerchantFactory);
+  },
+  transactionFactory: async ({}, use) => {
+    await use(TransactionFactory);
+  },
 });

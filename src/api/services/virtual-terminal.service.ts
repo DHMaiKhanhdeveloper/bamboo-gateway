@@ -60,10 +60,10 @@ export class VirtualTerminalApiService {
       ...options,
     });
 
-    return request.post(
-      `${this.baseURL}/merchants/${this.merchantId}/transactions/sale`,
-      { headers: this.getHeaders(), data: payload }
-    );
+    return request.post(`${this.baseURL}/merchants/${this.merchantId}/transactions/sale`, {
+      headers: this.getHeaders(),
+      data: payload,
+    });
   }
 
   async createSaleWithCompleteData(
@@ -73,37 +73,41 @@ export class VirtualTerminalApiService {
   ): Promise<APIResponse> {
     const payload = generateSaleTransactionPayload(amount, {
       requestId: options.requestId ?? generateRequestId(),
-      cardData:
-        options.cardData ?? {
-          encryptedPan:
-            "BN253zh9axn6MrYG0qHZzC3qNW683R9acKsR6NU+7h8gG7ZqyFXfdVAsYUrnzbmdt8ELD3Vn5H3G5MUHwN2mxw==",
-          cvv2: "999",
-          cardType: "CREDIT",
-          expMonth: "12",
-          expYear: "29",
-        },
+      cardData: options.cardData ?? {
+        encryptedPan:
+          "BN253zh9axn6MrYG0qHZzC3qNW683R9acKsR6NU+7h8gG7ZqyFXfdVAsYUrnzbmdt8ELD3Vn5H3G5MUHwN2mxw==",
+        cvv2: "999",
+        cardType: "CREDIT",
+        expMonth: "12",
+        expYear: "29",
+      },
       cardHolderData: options.cardHolderData ?? generateDefaultCardHolderData(),
       ...(options.amountData ? { amountData: options.amountData } : {}),
-      ...(options.merchantDefinedFields ? { merchantDefinedFields: options.merchantDefinedFields } : {}),
+      ...(options.merchantDefinedFields
+        ? { merchantDefinedFields: options.merchantDefinedFields }
+        : {}),
       ...(options.orderItems ? { orderItems: options.orderItems } : {}),
       industryCode: options.industryCode ?? "D",
       authOnly: options.authOnly ?? false,
     });
 
-    return request.post(
-      `${this.baseURL}/merchants/${this.merchantId}/transactions/sale`,
-      { headers: this.getHeaders(), data: payload }
-    );
+    return request.post(`${this.baseURL}/merchants/${this.merchantId}/transactions/sale`, {
+      headers: this.getHeaders(),
+      data: payload,
+    });
   }
 
   async verifySaleResponse(response: APIResponse): Promise<VerifiedSaleResponse> {
     const status = response.status();
     const contentType = response.headers()["content-type"] ?? "";
-    const isJson = contentType.includes("application/json") || contentType.includes("application/ld+json");
+    const isJson =
+      contentType.includes("application/json") || contentType.includes("application/ld+json");
 
     if (!isJson) {
       const text = await response.text();
-      this.log.error(`API returned non-JSON response (status ${status}, content-type ${contentType})`);
+      this.log.error(
+        `API returned non-JSON response (status ${status}, content-type ${contentType})`
+      );
       if (text.includes("<!DOCTYPE") || text.includes("<html")) {
         throw new ApiError(
           "API returned HTML instead of JSON. Authentication likely failed or wrong endpoint. " +
@@ -132,6 +136,10 @@ export class VirtualTerminalApiService {
     };
   }
 
-  generateRequestId(): string { return generateRequestId(); }
-  generateCardHolderData() { return generateDefaultCardHolderData(); }
+  generateRequestId(): string {
+    return generateRequestId();
+  }
+  generateCardHolderData() {
+    return generateDefaultCardHolderData();
+  }
 }

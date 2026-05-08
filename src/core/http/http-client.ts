@@ -12,7 +12,7 @@ export interface HttpRequestOptions {
   multipart?: Record<string, string | { name: string; mimeType: string; buffer: Buffer }>;
   timeout?: number;
   retry?: boolean | number;
-  ignoreHTTPErrors?: boolean;
+  ignoreHTTPSErrors?: boolean;
 }
 
 export interface HttpClientOptions {
@@ -81,14 +81,11 @@ export class HttpClient {
     return this.send("HEAD", path, opts);
   }
 
-  private async send(
-    method: string,
-    path: string,
-    opts: HttpRequestOptions
-  ): Promise<APIResponse> {
+  private async send(method: string, path: string, opts: HttpRequestOptions): Promise<APIResponse> {
     const url = this.buildUrl(path, opts.params);
     const headers = this.buildHeaders(opts.headers);
-    const maxAttempts = opts.retry === false ? 1 : typeof opts.retry === "number" ? opts.retry : RETRY.attempts;
+    const maxAttempts =
+      opts.retry === false ? 1 : typeof opts.retry === "number" ? opts.retry : RETRY.attempts;
 
     let lastError: unknown;
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -101,7 +98,7 @@ export class HttpClient {
           form: opts.form,
           multipart: opts.multipart as never,
           timeout: opts.timeout,
-          ignoreHTTPErrors: opts.ignoreHTTPErrors,
+          ignoreHTTPSErrors: opts.ignoreHTTPSErrors,
         });
         const duration = Date.now() - start;
         const status = response.status();

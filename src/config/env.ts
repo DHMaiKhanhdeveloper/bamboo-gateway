@@ -13,7 +13,11 @@ export const envSchema = z.object({
   TOTP_SECRET: z.string().min(1, "TOTP_SECRET is required"),
   CI: z.string().optional(),
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
-  AUTH_STATE_TTL_MS: z.coerce.number().int().positive().default(15 * 60 * 1000),
+  AUTH_STATE_TTL_MS: z.coerce
+    .number()
+    .int()
+    .positive()
+    .default(15 * 60 * 1000),
   BYPASS_AUTH_TOKEN: z.string().optional(),
 });
 
