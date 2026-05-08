@@ -49,7 +49,9 @@ function status(): void {
   for (const role of Object.values(AUTH_ROLES) as AuthRole[]) {
     const valid = AuthStateManager.isAuthStateValid(role);
     const file = AuthStateManager.getAuthStateFilePath(role);
-    console.info(`  ${role.padEnd(20)} ${valid ? "✅ valid" : "❌ missing/expired"}${file ? ` (${file})` : ""}`);
+    console.info(
+      `  ${role.padEnd(20)} ${valid ? "✅ valid" : "❌ missing/expired"}${file ? ` (${file})` : ""}`
+    );
   }
 }
 

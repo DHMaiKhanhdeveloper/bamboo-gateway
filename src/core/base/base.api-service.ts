@@ -46,10 +46,7 @@ export abstract class BaseApiService {
 
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
-      throw new ValidationError(
-        `${context}: response did not match schema`,
-        parsed.error.issues
-      );
+      throw new ValidationError(`${context}: response did not match schema`, parsed.error.issues);
     }
     return parsed.data;
   }
@@ -64,10 +61,7 @@ export abstract class BaseApiService {
   ): z.infer<S> {
     const parsed = schema.safeParse(payload);
     if (!parsed.success) {
-      throw new ValidationError(
-        `${context}: payload did not match schema`,
-        parsed.error.issues
-      );
+      throw new ValidationError(`${context}: payload did not match schema`, parsed.error.issues);
     }
     return parsed.data;
   }

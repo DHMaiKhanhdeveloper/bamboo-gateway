@@ -19,50 +19,112 @@ export interface LocationFieldsData {
 }
 
 export class ProductPage extends BasePage {
-  protected override get urlPath(): string { return "/products"; }
-  protected override readyLocator(): Locator { return this.productsListHeading; }
+  protected override get urlPath(): string {
+    return "/products";
+  }
+  protected override readyLocator(): Locator {
+    return this.productsListHeading;
+  }
 
   // ---------------------------------------------------------------------------
   // Headings
   // ---------------------------------------------------------------------------
-  get createProductHeading(): Locator { return this.page.getByRole("heading", { name: "Create Product" }); }
-  get updateProductHeading(): Locator { return this.page.getByRole("heading", { name: "Update Product" }); }
-  get productsListHeading(): Locator { return this.page.getByRole("heading", { name: "Products" }); }
+  get createProductHeading(): Locator {
+    return this.page.getByRole("heading", { name: "Create Product" });
+  }
+  get updateProductHeading(): Locator {
+    return this.page.getByRole("heading", { name: "Update Product" });
+  }
+  get productsListHeading(): Locator {
+    return this.page.getByRole("heading", { name: "Products" });
+  }
 
   // ---------------------------------------------------------------------------
   // Basic fields
   // ---------------------------------------------------------------------------
-  get productNameInput(): Locator { return this.page.getByTestId("product-name-input"); }
-  get categorySelect(): Locator { return this.page.getByTestId("product-category-select"); }
-  get addCategoryButton(): Locator { return this.page.getByTestId("add-category-button"); }
-  get descriptionTextarea(): Locator { return this.page.getByTestId("product-description-textarea"); }
-  get imageInput(): Locator { return this.page.getByTestId("product-image-input"); }
-  get skuInput(): Locator { return this.page.getByTestId("product-sku-input"); }
-  get upcInput(): Locator { return this.page.getByTestId("product-upc-input"); }
-  get commodityCodeSelect(): Locator { return this.page.getByTestId("product-commodity-code-select"); }
-  get unitSelect(): Locator { return this.page.getByTestId("product-unit-select"); }
+  get productNameInput(): Locator {
+    return this.page.getByTestId("product-name-input");
+  }
+  get categorySelect(): Locator {
+    return this.page.getByTestId("product-category-select");
+  }
+  get addCategoryButton(): Locator {
+    return this.page.getByTestId("add-category-button");
+  }
+  get descriptionTextarea(): Locator {
+    return this.page.getByTestId("product-description-textarea");
+  }
+  get imageInput(): Locator {
+    return this.page.getByTestId("product-image-input");
+  }
+  get skuInput(): Locator {
+    return this.page.getByTestId("product-sku-input");
+  }
+  get upcInput(): Locator {
+    return this.page.getByTestId("product-upc-input");
+  }
+  get commodityCodeSelect(): Locator {
+    return this.page.getByTestId("product-commodity-code-select");
+  }
+  get unitSelect(): Locator {
+    return this.page.getByTestId("product-unit-select");
+  }
 
   // Submit
-  get submitButton(): Locator { return this.page.getByTestId("product-submit-button"); }
-  get createProductButton(): Locator { return this.page.getByRole("button", { name: "Create Product" }); }
-  get updateProductButton(): Locator { return this.page.getByRole("button", { name: "Update Product" }); }
+  get submitButton(): Locator {
+    return this.page.getByTestId("product-submit-button");
+  }
+  get createProductButton(): Locator {
+    return this.page.getByRole("button", { name: "Create Product" });
+  }
+  get updateProductButton(): Locator {
+    return this.page.getByRole("button", { name: "Update Product" });
+  }
 
   // Location-indexed
-  getLocationSelect(i: number): Locator { return this.page.getByTestId(`product-location-select-${i}`); }
-  getAddLocationButton(i: number): Locator { return this.page.getByTestId(`add-location-button-${i}`); }
-  getLocationCostInput(i: number): Locator { return this.page.getByTestId(`product-location-cost-input-${i}`); }
-  getLocationPriceInput(i: number): Locator { return this.page.getByTestId(`product-location-price-input-${i}`); }
-  getLocationTaxRateInput(i: number): Locator { return this.page.getByTestId(`product-location-tax-rate-input-${i}`); }
-  getLocationDiscountInput(i: number): Locator { return this.page.getByTestId(`product-location-discount-input-${i}`); }
-  getLocationDiscountRateInput(i: number): Locator { return this.page.getByTestId(`product-location-discount-rate-input-${i}`); }
-  getLocationNonInventoryCheckbox(i: number): Locator { return this.page.getByTestId(`product-location-non-inventory-checkbox-${i}`); }
-  getLocationOnHandInput(i: number): Locator { return this.page.getByTestId(`product-location-on-hand-input-${i}`); }
-  getLocationOnOrderInput(i: number): Locator { return this.page.getByTestId(`product-location-on-order-input-${i}`); }
-  getLocationAlertLevelInput(i: number): Locator { return this.page.getByTestId(`product-location-alert-level-input-${i}`); }
-  getLocationRow(i: number): Locator { return this.page.getByTestId(`product-location-row-${i}`); }
-  getLocationName(i: number): Locator { return this.page.getByTestId(`product-location-name-${i}`); }
+  getLocationSelect(i: number): Locator {
+    return this.page.getByTestId(`product-location-select-${i}`);
+  }
+  getAddLocationButton(i: number): Locator {
+    return this.page.getByTestId(`add-location-button-${i}`);
+  }
+  getLocationCostInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-cost-input-${i}`);
+  }
+  getLocationPriceInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-price-input-${i}`);
+  }
+  getLocationTaxRateInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-tax-rate-input-${i}`);
+  }
+  getLocationDiscountInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-discount-input-${i}`);
+  }
+  getLocationDiscountRateInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-discount-rate-input-${i}`);
+  }
+  getLocationNonInventoryCheckbox(i: number): Locator {
+    return this.page.getByTestId(`product-location-non-inventory-checkbox-${i}`);
+  }
+  getLocationOnHandInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-on-hand-input-${i}`);
+  }
+  getLocationOnOrderInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-on-order-input-${i}`);
+  }
+  getLocationAlertLevelInput(i: number): Locator {
+    return this.page.getByTestId(`product-location-alert-level-input-${i}`);
+  }
+  getLocationRow(i: number): Locator {
+    return this.page.getByTestId(`product-location-row-${i}`);
+  }
+  getLocationName(i: number): Locator {
+    return this.page.getByTestId(`product-location-name-${i}`);
+  }
 
-  get addLocationButton(): Locator { return this.page.getByTestId("add-location-button"); }
+  get addLocationButton(): Locator {
+    return this.page.getByTestId("add-location-button");
+  }
 
   getLocationDiscountTypeCombobox(i: number): Locator {
     return this.page
@@ -79,34 +141,55 @@ export class ProductPage extends BasePage {
   }
 
   // Modals
-  get categoryModal(): Locator { return this.page.getByTestId("category-modal"); }
-  get locationModal(): Locator { return this.page.getByTestId("location-modal"); }
+  get categoryModal(): Locator {
+    return this.page.getByTestId("category-modal");
+  }
+  get locationModal(): Locator {
+    return this.page.getByTestId("location-modal");
+  }
 
   // ---------------------------------------------------------------------------
   // Navigation
   // ---------------------------------------------------------------------------
   async gotoCreateProduct(merchantId: string): Promise<void> {
-    await this.page.goto(`/${merchantId}/products/add`, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    await this.page.goto(`/${merchantId}/products/add`, {
+      waitUntil: "domcontentloaded",
+      timeout: 30_000,
+    });
     await expect(this.createProductHeading).toBeVisible({ timeout: 10_000 });
   }
 
   async gotoProductDetail(merchantId: string, productId: string): Promise<void> {
-    await this.page.goto(`/${merchantId}/products/${productId}`, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    await this.page.goto(`/${merchantId}/products/${productId}`, {
+      waitUntil: "domcontentloaded",
+      timeout: 30_000,
+    });
     await expect(this.updateProductHeading).toBeVisible({ timeout: 10_000 });
   }
 
   async gotoProductsList(merchantId: string): Promise<void> {
-    await this.page.goto(`/${merchantId}/products`, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    await this.page.goto(`/${merchantId}/products`, {
+      waitUntil: "domcontentloaded",
+      timeout: 30_000,
+    });
     await expect(this.productsListHeading).toBeVisible({ timeout: 10_000 });
   }
 
   // ---------------------------------------------------------------------------
   // Field actions
   // ---------------------------------------------------------------------------
-  async fillProductName(name: string): Promise<void> { await this.productNameInput.fill(name); }
-  async fillDescription(description: string): Promise<void> { await this.descriptionTextarea.fill(description); }
-  async fillSKU(sku: string): Promise<void> { await this.skuInput.fill(sku); }
-  async fillUPC(upc: string): Promise<void> { await this.upcInput.fill(upc); }
+  async fillProductName(name: string): Promise<void> {
+    await this.productNameInput.fill(name);
+  }
+  async fillDescription(description: string): Promise<void> {
+    await this.descriptionTextarea.fill(description);
+  }
+  async fillSKU(sku: string): Promise<void> {
+    await this.skuInput.fill(sku);
+  }
+  async fillUPC(upc: string): Promise<void> {
+    await this.upcInput.fill(upc);
+  }
 
   async selectCategory(categoryName: string): Promise<void> {
     await this.categorySelect.click();
@@ -171,9 +254,15 @@ export class ProductPage extends BasePage {
     await this.page.waitForTimeout(1_000);
   }
 
-  async fillLocationCost(i: number, cost: string): Promise<void> { await this.getLocationCostInput(i).fill(cost); }
-  async fillLocationPrice(i: number, price: string): Promise<void> { await this.getLocationPriceInput(i).fill(price); }
-  async fillLocationTaxRate(i: number, taxRate: string): Promise<void> { await this.getLocationTaxRateInput(i).fill(taxRate); }
+  async fillLocationCost(i: number, cost: string): Promise<void> {
+    await this.getLocationCostInput(i).fill(cost);
+  }
+  async fillLocationPrice(i: number, price: string): Promise<void> {
+    await this.getLocationPriceInput(i).fill(price);
+  }
+  async fillLocationTaxRate(i: number, taxRate: string): Promise<void> {
+    await this.getLocationTaxRateInput(i).fill(taxRate);
+  }
 
   async selectDiscountType(index: number, type: DiscountType): Promise<void> {
     const combobox = this.getLocationDiscountTypeCombobox(index);
@@ -200,9 +289,15 @@ export class ProductPage extends BasePage {
     }
   }
 
-  async fillLocationOnHand(i: number, onHand: string): Promise<void> { await this.getLocationOnHandInput(i).fill(onHand); }
-  async fillLocationOnOrder(i: number, onOrder: string): Promise<void> { await this.getLocationOnOrderInput(i).fill(onOrder); }
-  async fillLocationAlertLevel(i: number, alertLevel: string): Promise<void> { await this.getLocationAlertLevelInput(i).fill(alertLevel); }
+  async fillLocationOnHand(i: number, onHand: string): Promise<void> {
+    await this.getLocationOnHandInput(i).fill(onHand);
+  }
+  async fillLocationOnOrder(i: number, onOrder: string): Promise<void> {
+    await this.getLocationOnOrderInput(i).fill(onOrder);
+  }
+  async fillLocationAlertLevel(i: number, alertLevel: string): Promise<void> {
+    await this.getLocationAlertLevelInput(i).fill(alertLevel);
+  }
 
   async expandLocationRow(index: number): Promise<void> {
     const row = this.page.getByTestId(`product-location-row-${index}`);
@@ -222,18 +317,34 @@ export class ProductPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Submit
   // ---------------------------------------------------------------------------
-  async submitForm(): Promise<void> { await this.submitButton.click(); }
-  async createProduct(): Promise<void> { await this.createProductButton.click(); }
-  async updateProduct(): Promise<void> { await this.updateProductButton.click(); }
+  async submitForm(): Promise<void> {
+    await this.submitButton.click();
+  }
+  async createProduct(): Promise<void> {
+    await this.createProductButton.click();
+  }
+  async updateProduct(): Promise<void> {
+    await this.updateProductButton.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Verifications
   // ---------------------------------------------------------------------------
-  async verifyProductName(v: string): Promise<void> { await expect(this.productNameInput).toHaveValue(v); }
-  async verifyCategory(v: string): Promise<void> { await expect(this.categorySelect).toContainText(v); }
-  async verifyDescription(v: string): Promise<void> { await expect(this.descriptionTextarea).toHaveValue(v); }
-  async verifySKU(v: string): Promise<void> { await expect(this.skuInput).toHaveValue(v); }
-  async verifyUPC(v: string): Promise<void> { await expect(this.upcInput).toHaveValue(v); }
+  async verifyProductName(v: string): Promise<void> {
+    await expect(this.productNameInput).toHaveValue(v);
+  }
+  async verifyCategory(v: string): Promise<void> {
+    await expect(this.categorySelect).toContainText(v);
+  }
+  async verifyDescription(v: string): Promise<void> {
+    await expect(this.descriptionTextarea).toHaveValue(v);
+  }
+  async verifySKU(v: string): Promise<void> {
+    await expect(this.skuInput).toHaveValue(v);
+  }
+  async verifyUPC(v: string): Promise<void> {
+    await expect(this.upcInput).toHaveValue(v);
+  }
 
   async verifyLocationCost(i: number, cost: string): Promise<void> {
     await expect(this.getLocationCostInput(i)).toHaveValue(`$${cost}`);
@@ -309,7 +420,8 @@ export class ProductPage extends BasePage {
       if (data.inventory.enabled) {
         if (data.inventory.onHand) await this.fillLocationOnHand(index, data.inventory.onHand);
         if (data.inventory.onOrder) await this.fillLocationOnOrder(index, data.inventory.onOrder);
-        if (data.inventory.alertLevel) await this.fillLocationAlertLevel(index, data.inventory.alertLevel);
+        if (data.inventory.alertLevel)
+          await this.fillLocationAlertLevel(index, data.inventory.alertLevel);
       }
     }
   }

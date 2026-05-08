@@ -31,12 +31,7 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": [
-    "playwright.config.ts",
-    "src/**/*.ts",
-    "tests/**/*.ts",
-    "scripts/**/*.ts"
-  ],
+  "include": ["playwright.config.ts", "src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts"],
   "exclude": [
     "node_modules",
     "reports",

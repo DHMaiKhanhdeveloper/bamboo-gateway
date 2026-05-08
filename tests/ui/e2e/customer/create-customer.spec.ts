@@ -12,7 +12,11 @@ test.describe("Customer: Create", { tag: [TAGS.regression] }, () => {
     const data = customerFactory.build();
     await customerPage.gotoAddCustomer(getCommonMerchantIdSync());
     await customerPage.fillCustomerForm({
-      customerInfo: { customerId: data.customerId, firstName: data.firstName, lastName: data.lastName },
+      customerInfo: {
+        customerId: data.customerId,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      },
       paymentInfo: {
         cardNumber: data.card.cardNumber,
         expMonth: data.card.expDate.split("/")[0] ?? "12",

@@ -69,7 +69,9 @@ export class AuthApiClient {
     const cookies = headers["set-cookie"];
     if (cookies) {
       const cookieStr = Array.isArray(cookies) ? cookies.join("; ") : cookies;
-      const match = cookieStr.match(/(?:token|access_token|bearer|auth_token|session_id|jwt)=([^;]+)/i);
+      const match = cookieStr.match(
+        /(?:token|access_token|bearer|auth_token|session_id|jwt)=([^;]+)/i
+      );
       if (match?.[1]) return match[1];
     }
 

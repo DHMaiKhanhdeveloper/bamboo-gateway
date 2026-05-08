@@ -9,7 +9,6 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 
 const command = process.argv[2];
 const REPORT_DIR = path.resolve("reports/html");

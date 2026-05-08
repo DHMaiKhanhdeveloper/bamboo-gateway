@@ -9,43 +9,101 @@ export class LeftMenuComponent extends BaseComponent {
   // ---------------------------------------------------------------------------
   // Management section
   // ---------------------------------------------------------------------------
-  get managementGroup(): Locator { return this.page.getByTestId("nav-main-group"); }
-  get managementLabel(): Locator { return this.page.getByTestId("nav-main-label"); }
-  get dashboardLink(): Locator { return this.page.getByTestId("nav-main-link-dashboard"); }
-  get usersLink(): Locator { return this.page.getByTestId("nav-main-link-users"); }
-  get resellersTrigger(): Locator { return this.page.getByTestId("nav-main-button-resellers"); }
-  get resellersApplicationsLink(): Locator { return this.page.getByTestId("nav-main-link-applications"); }
-  get resellersAccountsLink(): Locator { return this.page.getByTestId("nav-main-link-accounts"); }
-  get merchantsLink(): Locator { return this.page.getByTestId("nav-main-link-merchants"); }
-  get employeesLink(): Locator { return this.page.getByTestId("nav-main-link-employees"); }
+  get managementGroup(): Locator {
+    return this.page.getByTestId("nav-main-group");
+  }
+  get managementLabel(): Locator {
+    return this.page.getByTestId("nav-main-label");
+  }
+  get dashboardLink(): Locator {
+    return this.page.getByTestId("nav-main-link-dashboard");
+  }
+  get usersLink(): Locator {
+    return this.page.getByTestId("nav-main-link-users");
+  }
+  get resellersTrigger(): Locator {
+    return this.page.getByTestId("nav-main-button-resellers");
+  }
+  get resellersApplicationsLink(): Locator {
+    return this.page.getByTestId("nav-main-link-applications");
+  }
+  get resellersAccountsLink(): Locator {
+    return this.page.getByTestId("nav-main-link-accounts");
+  }
+  get merchantsLink(): Locator {
+    return this.page.getByTestId("nav-main-link-merchants");
+  }
+  get employeesLink(): Locator {
+    return this.page.getByTestId("nav-main-link-employees");
+  }
 
   // ---------------------------------------------------------------------------
   // Features section
   // ---------------------------------------------------------------------------
-  get featuresGroup(): Locator { return this.page.getByTestId("nav-features-label"); }
-  get transactionsLink(): Locator { return this.page.getByTestId("nav-features-transactions"); }
-  get customersLink(): Locator { return this.page.getByTestId("nav-features-customers"); }
-  get virtualTerminalLink(): Locator { return this.page.getByTestId("nav-features-virtual-terminal"); }
-  get terminalsLink(): Locator { return this.page.getByTestId("nav-features-terminals"); }
-  get recurringTrigger(): Locator { return this.page.getByTestId("nav-features-recurring-trigger"); }
-  get recurringPaymentsLink(): Locator { return this.page.getByTestId("nav-features-recurring-payments"); }
-  get recurringPlansLink(): Locator { return this.page.getByTestId("nav-features-recurring-plans"); }
-  get inventoryTrigger(): Locator { return this.page.getByTestId("nav-features-inventory-trigger"); }
-  get inventoryCategoriesLink(): Locator { return this.page.getByTestId("nav-features-inventory-categories"); }
-  get inventoryPackagesLink(): Locator { return this.page.getByTestId("nav-features-inventory-packages"); }
-  get inventoryLocationsLink(): Locator { return this.page.getByTestId("nav-features-inventory-locations"); }
-  get inventoryProductsLink(): Locator { return this.page.getByTestId("nav-features-inventory-products"); }
-  get inventoryStockLink(): Locator { return this.page.getByTestId("nav-features-inventory-stock"); }
-  get invoicesLink(): Locator { return this.page.getByTestId("nav-features-invoices"); }
-  get merchantDefinedFieldsLink(): Locator { return this.page.getByTestId("nav-features-merchant-defined-fields"); }
+  get featuresGroup(): Locator {
+    return this.page.getByTestId("nav-features-label");
+  }
+  get transactionsLink(): Locator {
+    return this.page.getByTestId("nav-features-transactions");
+  }
+  get customersLink(): Locator {
+    return this.page.getByTestId("nav-features-customers");
+  }
+  get virtualTerminalLink(): Locator {
+    return this.page.getByTestId("nav-features-virtual-terminal");
+  }
+  get terminalsLink(): Locator {
+    return this.page.getByTestId("nav-features-terminals");
+  }
+  get recurringTrigger(): Locator {
+    return this.page.getByTestId("nav-features-recurring-trigger");
+  }
+  get recurringPaymentsLink(): Locator {
+    return this.page.getByTestId("nav-features-recurring-payments");
+  }
+  get recurringPlansLink(): Locator {
+    return this.page.getByTestId("nav-features-recurring-plans");
+  }
+  get inventoryTrigger(): Locator {
+    return this.page.getByTestId("nav-features-inventory-trigger");
+  }
+  get inventoryCategoriesLink(): Locator {
+    return this.page.getByTestId("nav-features-inventory-categories");
+  }
+  get inventoryPackagesLink(): Locator {
+    return this.page.getByTestId("nav-features-inventory-packages");
+  }
+  get inventoryLocationsLink(): Locator {
+    return this.page.getByTestId("nav-features-inventory-locations");
+  }
+  get inventoryProductsLink(): Locator {
+    return this.page.getByTestId("nav-features-inventory-products");
+  }
+  get inventoryStockLink(): Locator {
+    return this.page.getByTestId("nav-features-inventory-stock");
+  }
+  get invoicesLink(): Locator {
+    return this.page.getByTestId("nav-features-invoices");
+  }
+  get merchantDefinedFieldsLink(): Locator {
+    return this.page.getByTestId("nav-features-merchant-defined-fields");
+  }
 
   // ---------------------------------------------------------------------------
   // Management actions
   // ---------------------------------------------------------------------------
-  async navigateToDashboard(): Promise<void> { await this.dashboardLink.click(); }
-  async navigateToUsers(): Promise<void> { await this.usersLink.click(); }
-  async navigateToMerchants(): Promise<void> { await this.merchantsLink.click(); }
-  async navigateToEmployees(): Promise<void> { await this.employeesLink.click(); }
+  async navigateToDashboard(): Promise<void> {
+    await this.dashboardLink.click();
+  }
+  async navigateToUsers(): Promise<void> {
+    await this.usersLink.click();
+  }
+  async navigateToMerchants(): Promise<void> {
+    await this.merchantsLink.click();
+  }
+  async navigateToEmployees(): Promise<void> {
+    await this.employeesLink.click();
+  }
 
   async expandResellers(): Promise<void> {
     const collapsible = this.page.getByTestId("nav-main-collapsible-resellers");
@@ -75,10 +133,18 @@ export class LeftMenuComponent extends BaseComponent {
   // ---------------------------------------------------------------------------
   // Features actions
   // ---------------------------------------------------------------------------
-  async navigateToTransactions(): Promise<void> { await this.transactionsLink.click(); }
-  async navigateToCustomers(): Promise<void> { await this.customersLink.click(); }
-  async navigateToVirtualTerminal(): Promise<void> { await this.virtualTerminalLink.click(); }
-  async navigateToTerminals(): Promise<void> { await this.terminalsLink.click(); }
+  async navigateToTransactions(): Promise<void> {
+    await this.transactionsLink.click();
+  }
+  async navigateToCustomers(): Promise<void> {
+    await this.customersLink.click();
+  }
+  async navigateToVirtualTerminal(): Promise<void> {
+    await this.virtualTerminalLink.click();
+  }
+  async navigateToTerminals(): Promise<void> {
+    await this.terminalsLink.click();
+  }
 
   async expandRecurring(): Promise<void> {
     const visible = await this.recurringPaymentsLink.isVisible().catch(() => false);
@@ -141,8 +207,12 @@ export class LeftMenuComponent extends BaseComponent {
     await this.inventoryStockLink.click();
   }
 
-  async navigateToInvoices(): Promise<void> { await this.invoicesLink.click(); }
-  async navigateToMerchantDefinedFields(): Promise<void> { await this.merchantDefinedFieldsLink.click(); }
+  async navigateToInvoices(): Promise<void> {
+    await this.invoicesLink.click();
+  }
+  async navigateToMerchantDefinedFields(): Promise<void> {
+    await this.merchantDefinedFieldsLink.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Verification

@@ -23,10 +23,9 @@ if (!fs.existsSync(blobDir)) {
   process.exit(1);
 }
 
-const result = spawnSync(
-  "npx",
-  ["playwright", "merge-reports", "--reporter=html,json", blobDir],
-  { stdio: "inherit", shell: true }
-);
+const result = spawnSync("npx", ["playwright", "merge-reports", "--reporter=html,json", blobDir], {
+  stdio: "inherit",
+  shell: true,
+});
 
 process.exit(result.status ?? 0);

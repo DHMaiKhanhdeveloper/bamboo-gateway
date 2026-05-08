@@ -2,7 +2,11 @@ import { test } from "~/fixtures";
 import { TAGS } from "~/config/constants";
 
 test.describe("Smoke: Create Merchant", { tag: [TAGS.smoke] }, () => {
-  test("creates a new merchant via the UI", async ({ authenticatedPage, merchantPage, merchantFactory }) => {
+  test("creates a new merchant via the UI", async ({
+    authenticatedPage,
+    merchantPage,
+    merchantFactory,
+  }) => {
     test.skip(!process.env["RUN_FULL_SMOKE"], "Full smoke disabled — set RUN_FULL_SMOKE=1 to run");
 
     void authenticatedPage;

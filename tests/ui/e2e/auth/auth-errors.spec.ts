@@ -8,7 +8,11 @@ test.describe("Authentication: Error handling", { tag: [TAGS.regression] }, () =
 
   test("rejects invalid credentials", async ({ page }) => {
     await page.route("**/login", async (route) => {
-      await route.fulfill({ status: 400, contentType: "application/json", body: JSON.stringify({ message: "Invalid credentials" }) });
+      await route.fulfill({
+        status: 400,
+        contentType: "application/json",
+        body: JSON.stringify({ message: "Invalid credentials" }),
+      });
     });
     await page.getByTestId("username-input").fill("invalid@test.com");
     await page.getByTestId("password-input").fill("wrong");

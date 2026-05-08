@@ -76,8 +76,7 @@ export const API_ENDPOINTS = {
     `/merchants/${merchantId}/transactions/${txId}/capture`,
   reversal: (merchantId: string, txId: string) =>
     `/merchants/${merchantId}/transactions/${txId}/reversal`,
-  void: (merchantId: string, txId: string) =>
-    `/merchants/${merchantId}/transactions/${txId}/void`,
+  void: (merchantId: string, txId: string) => `/merchants/${merchantId}/transactions/${txId}/void`,
   incremental: (merchantId: string, txId: string) =>
     `/merchants/${merchantId}/transactions/${txId}/incremental`,
   return: (merchantId: string, txId: string) =>

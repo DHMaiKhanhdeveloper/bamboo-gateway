@@ -45,52 +45,128 @@ export interface CustomerFormData {
 }
 
 export class CustomerPage extends BasePage {
-  protected override get urlPath(): string { return "/customers/add"; }
-  protected override readyLocator(): Locator { return this.addCustomerHeading; }
+  protected override get urlPath(): string {
+    return "/customers/add";
+  }
+  protected override readyLocator(): Locator {
+    return this.addCustomerHeading;
+  }
 
   // ---------------------------------------------------------------------------
   // Locators
   // ---------------------------------------------------------------------------
-  get addCustomerHeading(): Locator { return this.page.getByRole("heading", { name: "Add New Customer" }); }
-  get customerIdInput(): Locator { return this.page.getByTestId("add-customer-customer-id-input"); }
-  get firstNameInput(): Locator { return this.page.getByTestId("add-customer-first-name-input"); }
-  get lastNameInput(): Locator { return this.page.getByTestId("add-customer-last-name-input"); }
-  get descriptionTextarea(): Locator { return this.page.getByTestId("add-customer-description-textarea"); }
-  get cardNumberInput(): Locator { return this.page.getByTestId("add-customer-card-number-input"); }
-  get expMonthInput(): Locator { return this.page.getByTestId("add-customer-exp-month-input"); }
-  get expYearInput(): Locator { return this.page.getByTestId("add-customer-exp-year-input"); }
-  get cvvInput(): Locator { return this.page.getByTestId("add-customer-cvv-input"); }
-  get sameAsBillingCheckbox(): Locator { return this.page.getByTestId("add-customer-is-same-as-billing-checkbox"); }
-  get submitButton(): Locator { return this.page.getByTestId("add-customer-submit-button"); }
-  get addCustomerButton(): Locator { return this.page.getByRole("button", { name: "Add Customer" }); }
+  get addCustomerHeading(): Locator {
+    return this.page.getByRole("heading", { name: "Add New Customer" });
+  }
+  get customerIdInput(): Locator {
+    return this.page.getByTestId("add-customer-customer-id-input");
+  }
+  get firstNameInput(): Locator {
+    return this.page.getByTestId("add-customer-first-name-input");
+  }
+  get lastNameInput(): Locator {
+    return this.page.getByTestId("add-customer-last-name-input");
+  }
+  get descriptionTextarea(): Locator {
+    return this.page.getByTestId("add-customer-description-textarea");
+  }
+  get cardNumberInput(): Locator {
+    return this.page.getByTestId("add-customer-card-number-input");
+  }
+  get expMonthInput(): Locator {
+    return this.page.getByTestId("add-customer-exp-month-input");
+  }
+  get expYearInput(): Locator {
+    return this.page.getByTestId("add-customer-exp-year-input");
+  }
+  get cvvInput(): Locator {
+    return this.page.getByTestId("add-customer-cvv-input");
+  }
+  get sameAsBillingCheckbox(): Locator {
+    return this.page.getByTestId("add-customer-is-same-as-billing-checkbox");
+  }
+  get submitButton(): Locator {
+    return this.page.getByTestId("add-customer-submit-button");
+  }
+  get addCustomerButton(): Locator {
+    return this.page.getByRole("button", { name: "Add Customer" });
+  }
 
   // Billing address fields
-  getBillingFirstNameInput(): Locator { return this.page.getByTestId("add-customer-billing-first-name-input"); }
-  getBillingLastNameInput(): Locator { return this.page.getByTestId("add-customer-billing-last-name-input"); }
-  getBillingPhoneInput(): Locator { return this.page.getByTestId("add-customer-billing-phone-input"); }
-  getBillingEmailInput(): Locator { return this.page.getByTestId("add-customer-billing-email-input"); }
-  getBillingCompanyInput(): Locator { return this.page.getByTestId("add-customer-billing-company-input"); }
-  getBillingAddress1Input(): Locator { return this.page.getByTestId("add-customer-billing-address1-input"); }
-  getBillingAddress2Input(): Locator { return this.page.getByTestId("add-customer-billing-address2-input"); }
-  getBillingCountrySelect(): Locator { return this.page.getByTestId("add-customer-billing-country-select"); }
-  getBillingCityInput(): Locator { return this.page.getByTestId("add-customer-billing-city-input"); }
-  getBillingStateInput(): Locator { return this.page.getByTestId("add-customer-billing-state-input"); }
-  getBillingStateSelect(): Locator { return this.page.getByTestId("add-customer-billing-state-select"); }
-  getBillingZipInput(): Locator { return this.page.getByTestId("add-customer-billing-zip-input"); }
+  getBillingFirstNameInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-first-name-input");
+  }
+  getBillingLastNameInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-last-name-input");
+  }
+  getBillingPhoneInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-phone-input");
+  }
+  getBillingEmailInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-email-input");
+  }
+  getBillingCompanyInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-company-input");
+  }
+  getBillingAddress1Input(): Locator {
+    return this.page.getByTestId("add-customer-billing-address1-input");
+  }
+  getBillingAddress2Input(): Locator {
+    return this.page.getByTestId("add-customer-billing-address2-input");
+  }
+  getBillingCountrySelect(): Locator {
+    return this.page.getByTestId("add-customer-billing-country-select");
+  }
+  getBillingCityInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-city-input");
+  }
+  getBillingStateInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-state-input");
+  }
+  getBillingStateSelect(): Locator {
+    return this.page.getByTestId("add-customer-billing-state-select");
+  }
+  getBillingZipInput(): Locator {
+    return this.page.getByTestId("add-customer-billing-zip-input");
+  }
 
   // Shipping address fields
-  getShippingFirstNameInput(): Locator { return this.page.getByTestId("add-customer-shipping-first-name-input"); }
-  getShippingLastNameInput(): Locator { return this.page.getByTestId("add-customer-shipping-last-name-input"); }
-  getShippingPhoneInput(): Locator { return this.page.getByTestId("add-customer-shipping-phone-input"); }
-  getShippingEmailInput(): Locator { return this.page.getByTestId("add-customer-shipping-email-input"); }
-  getShippingCompanyInput(): Locator { return this.page.getByTestId("add-customer-shipping-company-input"); }
-  getShippingAddress1Input(): Locator { return this.page.getByTestId("add-customer-shipping-address1-input"); }
-  getShippingAddress2Input(): Locator { return this.page.getByTestId("add-customer-shipping-address2-input"); }
-  getShippingCountrySelect(): Locator { return this.page.getByTestId("add-customer-shipping-country-select"); }
-  getShippingCityInput(): Locator { return this.page.getByTestId("add-customer-shipping-city-input"); }
-  getShippingStateInput(): Locator { return this.page.getByTestId("add-customer-shipping-state-input"); }
-  getShippingStateSelect(): Locator { return this.page.getByTestId("add-customer-shipping-state-select"); }
-  getShippingZipInput(): Locator { return this.page.getByTestId("add-customer-shipping-zip-input"); }
+  getShippingFirstNameInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-first-name-input");
+  }
+  getShippingLastNameInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-last-name-input");
+  }
+  getShippingPhoneInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-phone-input");
+  }
+  getShippingEmailInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-email-input");
+  }
+  getShippingCompanyInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-company-input");
+  }
+  getShippingAddress1Input(): Locator {
+    return this.page.getByTestId("add-customer-shipping-address1-input");
+  }
+  getShippingAddress2Input(): Locator {
+    return this.page.getByTestId("add-customer-shipping-address2-input");
+  }
+  getShippingCountrySelect(): Locator {
+    return this.page.getByTestId("add-customer-shipping-country-select");
+  }
+  getShippingCityInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-city-input");
+  }
+  getShippingStateInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-state-input");
+  }
+  getShippingStateSelect(): Locator {
+    return this.page.getByTestId("add-customer-shipping-state-select");
+  }
+  getShippingZipInput(): Locator {
+    return this.page.getByTestId("add-customer-shipping-zip-input");
+  }
 
   // ---------------------------------------------------------------------------
   // Navigation
@@ -106,31 +182,65 @@ export class CustomerPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Customer info
   // ---------------------------------------------------------------------------
-  async fillCustomerId(customerId: string): Promise<void> { await this.customerIdInput.fill(customerId); }
-  async fillFirstName(firstName: string): Promise<void> { await this.firstNameInput.fill(firstName); }
-  async fillLastName(lastName: string): Promise<void> { await this.lastNameInput.fill(lastName); }
-  async fillDescription(description: string): Promise<void> { await this.descriptionTextarea.fill(description); }
+  async fillCustomerId(customerId: string): Promise<void> {
+    await this.customerIdInput.fill(customerId);
+  }
+  async fillFirstName(firstName: string): Promise<void> {
+    await this.firstNameInput.fill(firstName);
+  }
+  async fillLastName(lastName: string): Promise<void> {
+    await this.lastNameInput.fill(lastName);
+  }
+  async fillDescription(description: string): Promise<void> {
+    await this.descriptionTextarea.fill(description);
+  }
 
   // ---------------------------------------------------------------------------
   // Payment info
   // ---------------------------------------------------------------------------
-  async fillCardNumber(cardNumber: string): Promise<void> { await this.cardNumberInput.fill(cardNumber); }
-  async fillExpMonth(expMonth: string): Promise<void> { await this.expMonthInput.fill(expMonth); }
-  async fillExpYear(expYear: string): Promise<void> { await this.expYearInput.fill(expYear); }
-  async fillCvv(cvv: string): Promise<void> { await this.cvvInput.fill(cvv); }
+  async fillCardNumber(cardNumber: string): Promise<void> {
+    await this.cardNumberInput.fill(cardNumber);
+  }
+  async fillExpMonth(expMonth: string): Promise<void> {
+    await this.expMonthInput.fill(expMonth);
+  }
+  async fillExpYear(expYear: string): Promise<void> {
+    await this.expYearInput.fill(expYear);
+  }
+  async fillCvv(cvv: string): Promise<void> {
+    await this.cvvInput.fill(cvv);
+  }
 
   // ---------------------------------------------------------------------------
   // Billing address
   // ---------------------------------------------------------------------------
-  async fillBillingFirstName(v: string): Promise<void> { await this.getBillingFirstNameInput().fill(v); }
-  async fillBillingLastName(v: string): Promise<void> { await this.getBillingLastNameInput().fill(v); }
-  async fillBillingPhone(v: string): Promise<void> { await this.getBillingPhoneInput().fill(v); }
-  async fillBillingEmail(v: string): Promise<void> { await this.getBillingEmailInput().fill(v); }
-  async fillBillingCompany(v: string): Promise<void> { await this.getBillingCompanyInput().fill(v); }
-  async fillBillingAddress1(v: string): Promise<void> { await this.getBillingAddress1Input().fill(v); }
-  async fillBillingAddress2(v: string): Promise<void> { await this.getBillingAddress2Input().fill(v); }
-  async fillBillingCity(v: string): Promise<void> { await this.getBillingCityInput().fill(v); }
-  async fillBillingZip(v: string): Promise<void> { await this.getBillingZipInput().fill(v); }
+  async fillBillingFirstName(v: string): Promise<void> {
+    await this.getBillingFirstNameInput().fill(v);
+  }
+  async fillBillingLastName(v: string): Promise<void> {
+    await this.getBillingLastNameInput().fill(v);
+  }
+  async fillBillingPhone(v: string): Promise<void> {
+    await this.getBillingPhoneInput().fill(v);
+  }
+  async fillBillingEmail(v: string): Promise<void> {
+    await this.getBillingEmailInput().fill(v);
+  }
+  async fillBillingCompany(v: string): Promise<void> {
+    await this.getBillingCompanyInput().fill(v);
+  }
+  async fillBillingAddress1(v: string): Promise<void> {
+    await this.getBillingAddress1Input().fill(v);
+  }
+  async fillBillingAddress2(v: string): Promise<void> {
+    await this.getBillingAddress2Input().fill(v);
+  }
+  async fillBillingCity(v: string): Promise<void> {
+    await this.getBillingCityInput().fill(v);
+  }
+  async fillBillingZip(v: string): Promise<void> {
+    await this.getBillingZipInput().fill(v);
+  }
 
   async selectBillingCountry(countryName: string): Promise<void> {
     await this.selectCountry("billing", countryName);
@@ -151,15 +261,33 @@ export class CustomerPage extends BasePage {
     }
   }
 
-  async fillShippingFirstName(v: string): Promise<void> { await this.getShippingFirstNameInput().fill(v); }
-  async fillShippingLastName(v: string): Promise<void> { await this.getShippingLastNameInput().fill(v); }
-  async fillShippingPhone(v: string): Promise<void> { await this.getShippingPhoneInput().fill(v); }
-  async fillShippingEmail(v: string): Promise<void> { await this.getShippingEmailInput().fill(v); }
-  async fillShippingCompany(v: string): Promise<void> { await this.getShippingCompanyInput().fill(v); }
-  async fillShippingAddress1(v: string): Promise<void> { await this.getShippingAddress1Input().fill(v); }
-  async fillShippingAddress2(v: string): Promise<void> { await this.getShippingAddress2Input().fill(v); }
-  async fillShippingCity(v: string): Promise<void> { await this.getShippingCityInput().fill(v); }
-  async fillShippingZip(v: string): Promise<void> { await this.getShippingZipInput().fill(v); }
+  async fillShippingFirstName(v: string): Promise<void> {
+    await this.getShippingFirstNameInput().fill(v);
+  }
+  async fillShippingLastName(v: string): Promise<void> {
+    await this.getShippingLastNameInput().fill(v);
+  }
+  async fillShippingPhone(v: string): Promise<void> {
+    await this.getShippingPhoneInput().fill(v);
+  }
+  async fillShippingEmail(v: string): Promise<void> {
+    await this.getShippingEmailInput().fill(v);
+  }
+  async fillShippingCompany(v: string): Promise<void> {
+    await this.getShippingCompanyInput().fill(v);
+  }
+  async fillShippingAddress1(v: string): Promise<void> {
+    await this.getShippingAddress1Input().fill(v);
+  }
+  async fillShippingAddress2(v: string): Promise<void> {
+    await this.getShippingAddress2Input().fill(v);
+  }
+  async fillShippingCity(v: string): Promise<void> {
+    await this.getShippingCityInput().fill(v);
+  }
+  async fillShippingZip(v: string): Promise<void> {
+    await this.getShippingZipInput().fill(v);
+  }
 
   async selectShippingCountry(countryName: string): Promise<void> {
     await this.selectCountry("shipping", countryName);
@@ -190,7 +318,8 @@ export class CustomerPage extends BasePage {
   }
 
   private async fillStateField(scope: "billing" | "shipping", state: string): Promise<void> {
-    const select = scope === "billing" ? this.getBillingStateSelect() : this.getShippingStateSelect();
+    const select =
+      scope === "billing" ? this.getBillingStateSelect() : this.getShippingStateSelect();
     const input = scope === "billing" ? this.getBillingStateInput() : this.getShippingStateInput();
     const isSelectVisible = await select.isVisible({ timeout: 1_000 }).catch(() => false);
     if (isSelectVisible) {
@@ -206,16 +335,28 @@ export class CustomerPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Submit
   // ---------------------------------------------------------------------------
-  async submitForm(): Promise<void> { await this.submitButton.click(); }
-  async addCustomer(): Promise<void> { await this.addCustomerButton.click(); }
+  async submitForm(): Promise<void> {
+    await this.submitButton.click();
+  }
+  async addCustomer(): Promise<void> {
+    await this.addCustomerButton.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Verifications
   // ---------------------------------------------------------------------------
-  async verifyCustomerId(v: string): Promise<void> { await expect(this.customerIdInput).toHaveValue(v); }
-  async verifyFirstName(v: string): Promise<void> { await expect(this.firstNameInput).toHaveValue(v); }
-  async verifyLastName(v: string): Promise<void> { await expect(this.lastNameInput).toHaveValue(v); }
-  async verifyDescription(v: string): Promise<void> { await expect(this.descriptionTextarea).toHaveValue(v); }
+  async verifyCustomerId(v: string): Promise<void> {
+    await expect(this.customerIdInput).toHaveValue(v);
+  }
+  async verifyFirstName(v: string): Promise<void> {
+    await expect(this.firstNameInput).toHaveValue(v);
+  }
+  async verifyLastName(v: string): Promise<void> {
+    await expect(this.lastNameInput).toHaveValue(v);
+  }
+  async verifyDescription(v: string): Promise<void> {
+    await expect(this.descriptionTextarea).toHaveValue(v);
+  }
 
   async verifyCardNumber(expectedCardNumber: string): Promise<void> {
     const first4 = expectedCardNumber.substring(0, 4);
@@ -223,12 +364,24 @@ export class CustomerPage extends BasePage {
     await expect(this.cardNumberInput).toHaveValue(new RegExp(`${first4}.*${last4}`));
   }
 
-  async verifyExpMonth(v: string): Promise<void> { await expect(this.expMonthInput).toHaveValue(v); }
-  async verifyExpYear(v: string): Promise<void> { await expect(this.expYearInput).toHaveValue(v); }
-  async verifyCvv(v: string): Promise<void> { await expect(this.cvvInput).toHaveValue(v); }
-  async verifyBillingFirstName(v: string): Promise<void> { await expect(this.getBillingFirstNameInput()).toHaveValue(v); }
-  async verifyBillingLastName(v: string): Promise<void> { await expect(this.getBillingLastNameInput()).toHaveValue(v); }
-  async verifyBillingEmail(v: string): Promise<void> { await expect(this.getBillingEmailInput()).toHaveValue(v); }
+  async verifyExpMonth(v: string): Promise<void> {
+    await expect(this.expMonthInput).toHaveValue(v);
+  }
+  async verifyExpYear(v: string): Promise<void> {
+    await expect(this.expYearInput).toHaveValue(v);
+  }
+  async verifyCvv(v: string): Promise<void> {
+    await expect(this.cvvInput).toHaveValue(v);
+  }
+  async verifyBillingFirstName(v: string): Promise<void> {
+    await expect(this.getBillingFirstNameInput()).toHaveValue(v);
+  }
+  async verifyBillingLastName(v: string): Promise<void> {
+    await expect(this.getBillingLastNameInput()).toHaveValue(v);
+  }
+  async verifyBillingEmail(v: string): Promise<void> {
+    await expect(this.getBillingEmailInput()).toHaveValue(v);
+  }
 
   async verifySameAsBilling(expected: boolean): Promise<void> {
     if (expected) await expect(this.sameAsBillingCheckbox).toBeChecked();

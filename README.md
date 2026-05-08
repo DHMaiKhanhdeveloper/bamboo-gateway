@@ -65,24 +65,24 @@ npm run dev          # http://localhost:5173
 
 ## Available scripts
 
-| Script | Purpose |
-|--------|---------|
-| `npm test` | Run all tests |
-| `npm run test:ui` | UI tests only (project `chromium-ui`) |
-| `npm run test:api` | API tests only (project `chromium-api`) |
-| `npm run test:smoke` | `@smoke` tagged tests |
-| `npm run test:regression` | `@regression` tagged tests |
-| `npm run test:tickets` | `@ticket` tagged tests |
-| `npm run test:allure` | Run with Allure reporter |
-| `npm run ui` | Open Playwright UI |
-| `npm run auth:login` | Generate fresh auth states |
-| `npm run auth:status` | Show current auth state validity |
-| `npm run auth:clear` | Clear cached auth states |
-| `npm run lint` | ESLint check |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run validate` | typecheck + lint + format |
-| `npm run report:merge` | Merge blob reports → HTML |
-| `npm run allure:serve` | Generate + open Allure report |
+| Script                    | Purpose                                 |
+| ------------------------- | --------------------------------------- |
+| `npm test`                | Run all tests                           |
+| `npm run test:ui`         | UI tests only (project `chromium-ui`)   |
+| `npm run test:api`        | API tests only (project `chromium-api`) |
+| `npm run test:smoke`      | `@smoke` tagged tests                   |
+| `npm run test:regression` | `@regression` tagged tests              |
+| `npm run test:tickets`    | `@ticket` tagged tests                  |
+| `npm run test:allure`     | Run with Allure reporter                |
+| `npm run ui`              | Open Playwright UI                      |
+| `npm run auth:login`      | Generate fresh auth states              |
+| `npm run auth:status`     | Show current auth state validity        |
+| `npm run auth:clear`      | Clear cached auth states                |
+| `npm run lint`            | ESLint check                            |
+| `npm run typecheck`       | `tsc --noEmit`                          |
+| `npm run validate`        | typecheck + lint + format               |
+| `npm run report:merge`    | Merge blob reports → HTML               |
+| `npm run allure:serve`    | Generate + open Allure report           |
 
 ## Documentation
 

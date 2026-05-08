@@ -59,30 +59,22 @@ header(3, "Cài đặt dependencies (dashboard)");
 run("npm", ["--prefix", "dashboard", "install"], { label: "npm install (dashboard)" });
 
 header(4, "Chạy login test cases (smoke + auth)");
-run(
-  "npx",
-  [
-    "playwright",
-    "test",
-    "tests/ui/smoke/critical-path.spec.ts",
-    "tests/ui/e2e/auth",
-  ],
-  { abortOnFail: false, label: "playwright test login suite" }
-);
+run("npx", ["playwright", "test", "tests/ui/smoke/critical-path.spec.ts", "tests/ui/e2e/auth"], {
+  abortOnFail: false,
+  label: "playwright test login suite",
+});
 
 header(5, "Aggregate kết quả test → test-aggregation.json");
-run(
-  "npx",
-  ["tsx", "scripts/generate-suite-aggregation.ts"],
-  { abortOnFail: false, label: "generate-suite-aggregation" }
-);
+run("npx", ["tsx", "scripts/generate-suite-aggregation.ts"], {
+  abortOnFail: false,
+  label: "generate-suite-aggregation",
+});
 
 header(6, "Generate manifest → test-suites-manifest.json");
-run(
-  "npx",
-  ["tsx", "scripts/generate-test-suites-manifest.ts"],
-  { abortOnFail: false, label: "generate-test-suites-manifest" }
-);
+run("npx", ["tsx", "scripts/generate-test-suites-manifest.ts"], {
+  abortOnFail: false,
+  label: "generate-test-suites-manifest",
+});
 
 header(7, "Sync data sang dashboard/public");
 run("npm", ["--prefix", "dashboard", "run", "sync-data"], { label: "sync-data" });

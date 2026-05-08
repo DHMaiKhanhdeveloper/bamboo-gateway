@@ -28,7 +28,8 @@ export const MerchantFactory = {
     const state = faker.location.state({ abbreviated: true });
     const city = faker.location.city();
     return {
-      merchantName: overrides.merchantName ?? `Test Merchant ${faker.string.alphanumeric(6).toUpperCase()}`,
+      merchantName:
+        overrides.merchantName ?? `Test Merchant ${faker.string.alphanumeric(6).toUpperCase()}`,
       timezone: overrides.timezone ?? "(GMT-08:00) Pacific Time (US & Canada)",
       category: overrides.category ?? "Restaurants",
       contact: overrides.contact ?? {

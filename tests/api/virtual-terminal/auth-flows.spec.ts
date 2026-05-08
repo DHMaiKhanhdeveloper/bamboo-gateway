@@ -17,7 +17,10 @@ test.describe("Virtual Terminal Auth/Capture API", { tag: [TAGS.api, TAGS.regres
     expect(authResult.isSuccess).toBeTruthy();
     if (!authResult.transactionId) test.skip(true, "Auth did not return transactionId");
 
-    const captureResponse = await transactionService.captureAuth(request, authResult.transactionId!);
+    const captureResponse = await transactionService.captureAuth(
+      request,
+      authResult.transactionId!
+    );
     const captureResult = await transactionService.verifyTransactionResponse(captureResponse);
     expect(captureResult.isSuccess).toBeTruthy();
   });

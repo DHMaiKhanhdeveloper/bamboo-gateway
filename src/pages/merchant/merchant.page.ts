@@ -57,7 +57,9 @@ export interface TSYSProcessorInfoData {
 }
 
 export class MerchantPage extends BasePage {
-  protected override get urlPath(): string { return "/merchants"; }
+  protected override get urlPath(): string {
+    return "/merchants";
+  }
   protected override readyLocator(): Locator {
     return this.page.getByRole("heading", { name: "Merchants" });
   }
@@ -65,36 +67,84 @@ export class MerchantPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Merchant info locators
   // ---------------------------------------------------------------------------
-  get merchantNameInput(): Locator { return this.page.getByTestId("merchant-name-input"); }
-  get accountDropdown(): Locator { return this.page.getByTestId("account-type-select"); }
-  get countryDropdown(): Locator { return this.page.getByTestId("countryCode"); }
-  get timezoneDropdown(): Locator { return this.page.getByTestId("timezone"); }
-  get batchCloseTimeInput(): Locator { return this.page.getByTestId("batch-close-time-input"); }
-  get demandDepositAccountDropdown(): Locator { return this.page.getByTestId("dda-account-type-select"); }
-  get categoryDropdown(): Locator { return this.page.getByTestId("categoryCode"); }
+  get merchantNameInput(): Locator {
+    return this.page.getByTestId("merchant-name-input");
+  }
+  get accountDropdown(): Locator {
+    return this.page.getByTestId("account-type-select");
+  }
+  get countryDropdown(): Locator {
+    return this.page.getByTestId("countryCode");
+  }
+  get timezoneDropdown(): Locator {
+    return this.page.getByTestId("timezone");
+  }
+  get batchCloseTimeInput(): Locator {
+    return this.page.getByTestId("batch-close-time-input");
+  }
+  get demandDepositAccountDropdown(): Locator {
+    return this.page.getByTestId("dda-account-type-select");
+  }
+  get categoryDropdown(): Locator {
+    return this.page.getByTestId("categoryCode");
+  }
 
   // Contact
-  get contactNameInput(): Locator { return this.page.getByTestId("conName-input"); }
-  get contactPhoneInput(): Locator { return this.page.getByTestId("conPhone"); }
-  get contactEmailInput(): Locator { return this.page.getByTestId("conEmail-input"); }
-  get contactCityInput(): Locator { return this.page.getByTestId("conCity"); }
-  get contactStateDropdown(): Locator { return this.page.getByTestId("conState"); }
-  get contactZipCodeInput(): Locator { return this.page.getByTestId("conZip"); }
-  get contactAddressInput(): Locator { return this.page.getByTestId("conAddress"); }
+  get contactNameInput(): Locator {
+    return this.page.getByTestId("conName-input");
+  }
+  get contactPhoneInput(): Locator {
+    return this.page.getByTestId("conPhone");
+  }
+  get contactEmailInput(): Locator {
+    return this.page.getByTestId("conEmail-input");
+  }
+  get contactCityInput(): Locator {
+    return this.page.getByTestId("conCity");
+  }
+  get contactStateDropdown(): Locator {
+    return this.page.getByTestId("conState");
+  }
+  get contactZipCodeInput(): Locator {
+    return this.page.getByTestId("conZip");
+  }
+  get contactAddressInput(): Locator {
+    return this.page.getByTestId("conAddress");
+  }
 
   // Business
-  get businessPhoneInput(): Locator { return this.page.getByTestId("businessPhone"); }
-  get businessStateDropdown(): Locator { return this.page.getByTestId("businessState"); }
-  get businessCityInput(): Locator { return this.page.getByTestId("businessCity"); }
-  get businessZipCodeInput(): Locator { return this.page.getByTestId("businessZip"); }
-  get businessAreaCodeInput(): Locator { return this.page.getByTestId("businessAreaCode-input"); }
-  get businessAddressInput(): Locator { return this.page.getByTestId("businessAddress"); }
+  get businessPhoneInput(): Locator {
+    return this.page.getByTestId("businessPhone");
+  }
+  get businessStateDropdown(): Locator {
+    return this.page.getByTestId("businessState");
+  }
+  get businessCityInput(): Locator {
+    return this.page.getByTestId("businessCity");
+  }
+  get businessZipCodeInput(): Locator {
+    return this.page.getByTestId("businessZip");
+  }
+  get businessAreaCodeInput(): Locator {
+    return this.page.getByTestId("businessAreaCode-input");
+  }
+  get businessAddressInput(): Locator {
+    return this.page.getByTestId("businessAddress");
+  }
 
   // Terminal
-  get terminalNameInput(): Locator { return this.page.getByTestId("terminals-form-name"); }
-  get terminalStatusDropdown(): Locator { return this.page.getByTestId("terminals-form-status"); }
-  get terminalDeviceDropdown(): Locator { return this.page.getByTestId("terminals-form-device"); }
-  get terminalSerialNumberInput(): Locator { return this.page.getByTestId("terminals-form-serial-number"); }
+  get terminalNameInput(): Locator {
+    return this.page.getByTestId("terminals-form-name");
+  }
+  get terminalStatusDropdown(): Locator {
+    return this.page.getByTestId("terminals-form-status");
+  }
+  get terminalDeviceDropdown(): Locator {
+    return this.page.getByTestId("terminals-form-device");
+  }
+  get terminalSerialNumberInput(): Locator {
+    return this.page.getByTestId("terminals-form-serial-number");
+  }
 
   processorDropdown(terminalIndex: number = 0, processorIndex: number = 0): Locator {
     return this.page.locator(
@@ -103,56 +153,128 @@ export class MerchantPage extends BasePage {
   }
 
   // TSYS processor
-  get midInput(): Locator { return this.page.getByRole("textbox", { name: "MID" }); }
-  get terminalNumberInput(): Locator { return this.page.getByRole("textbox", { name: "Terminal #" }); }
-  get binInput(): Locator { return this.page.getByRole("textbox", { name: "BIN" }); }
-  get vNumberInput(): Locator { return this.page.getByPlaceholder("VNumber"); }
-  get agentInput(): Locator { return this.page.getByRole("textbox", { name: "Agent", exact: true }); }
-  get chainInput(): Locator { return this.page.getByRole("textbox", { name: "Chain" }); }
-  get storeNumberInput(): Locator { return this.page.getByPlaceholder("Store Number"); }
-  get debitSharingGroupInput(): Locator { return this.page.getByRole("textbox", { name: "Debit Sharing Group" }); }
-  get debitSettlementAgentNumberInput(): Locator { return this.page.getByPlaceholder("Debit Settlement Agent Number"); }
-  get tsysDeviceDropdown(): Locator { return this.page.locator("button", { hasText: "- Select Device" }); }
-  get debitAmericanBankersAssociationNumberInput(): Locator { return this.page.getByPlaceholder("Debit American Bankers"); }
+  get midInput(): Locator {
+    return this.page.getByRole("textbox", { name: "MID" });
+  }
+  get terminalNumberInput(): Locator {
+    return this.page.getByRole("textbox", { name: "Terminal #" });
+  }
+  get binInput(): Locator {
+    return this.page.getByRole("textbox", { name: "BIN" });
+  }
+  get vNumberInput(): Locator {
+    return this.page.getByPlaceholder("VNumber");
+  }
+  get agentInput(): Locator {
+    return this.page.getByRole("textbox", { name: "Agent", exact: true });
+  }
+  get chainInput(): Locator {
+    return this.page.getByRole("textbox", { name: "Chain" });
+  }
+  get storeNumberInput(): Locator {
+    return this.page.getByPlaceholder("Store Number");
+  }
+  get debitSharingGroupInput(): Locator {
+    return this.page.getByRole("textbox", { name: "Debit Sharing Group" });
+  }
+  get debitSettlementAgentNumberInput(): Locator {
+    return this.page.getByPlaceholder("Debit Settlement Agent Number");
+  }
+  get tsysDeviceDropdown(): Locator {
+    return this.page.locator("button", { hasText: "- Select Device" });
+  }
+  get debitAmericanBankersAssociationNumberInput(): Locator {
+    return this.page.getByPlaceholder("Debit American Bankers");
+  }
 
-  debitReimbursementAttributeDropdown(terminalIndex: number = 0, processorIndex: number = 0): Locator {
+  debitReimbursementAttributeDropdown(
+    terminalIndex: number = 0,
+    processorIndex: number = 0
+  ): Locator {
     return this.page.locator(
       `button[name="terminals[${terminalIndex}].processorSettings[${processorIndex}].config.debitReimbursAtt"]`
     );
   }
 
   // Home screen / settings
-  get dualPricingSwitch(): Locator { return this.page.getByRole("switch", { name: "Dual Pricing" }); }
-  get cashDiscountPercentageInput(): Locator { return this.page.getByRole("spinbutton", { name: "Cash Discount Percentage" }); }
-  get enteredAmountModeDropdown(): Locator { return this.page.getByRole("combobox", { name: "Entered Amount Mode" }); }
-  get resellerAccountCombobox(): Locator { return this.page.getByRole("combobox", { name: "Find a reseller" }); }
+  get dualPricingSwitch(): Locator {
+    return this.page.getByRole("switch", { name: "Dual Pricing" });
+  }
+  get cashDiscountPercentageInput(): Locator {
+    return this.page.getByRole("spinbutton", { name: "Cash Discount Percentage" });
+  }
+  get enteredAmountModeDropdown(): Locator {
+    return this.page.getByRole("combobox", { name: "Entered Amount Mode" });
+  }
+  get resellerAccountCombobox(): Locator {
+    return this.page.getByRole("combobox", { name: "Find a reseller" });
+  }
 
   // Switches
-  get demoMerchantSwitch(): Locator { return this.page.getByTestId("demo-merchant-switch"); }
-  get needAgreementSwitch(): Locator { return this.page.getByTestId("need-agreement-switch"); }
-  get allowDeferredAuthorizationSwitch(): Locator { return this.page.getByTestId("allow-deferred-authorization-switch"); }
-  get allowPartialsSwitch(): Locator { return this.page.getByTestId("allow-partials-switch"); }
-  get enabledMerchantSwitch(): Locator { return this.page.getByTestId("enabled-merchant-switch"); }
-  get allowDuplicatesSwitch(): Locator { return this.page.getByTestId("allow-duplicates-switch"); }
-  get allowPcLvl3Switch(): Locator { return this.page.getByTestId("allow-pc-lvl3-switch"); }
-  get manualCloseSwitch(): Locator { return this.page.getByTestId("manual-close-switch"); }
+  get demoMerchantSwitch(): Locator {
+    return this.page.getByTestId("demo-merchant-switch");
+  }
+  get needAgreementSwitch(): Locator {
+    return this.page.getByTestId("need-agreement-switch");
+  }
+  get allowDeferredAuthorizationSwitch(): Locator {
+    return this.page.getByTestId("allow-deferred-authorization-switch");
+  }
+  get allowPartialsSwitch(): Locator {
+    return this.page.getByTestId("allow-partials-switch");
+  }
+  get enabledMerchantSwitch(): Locator {
+    return this.page.getByTestId("enabled-merchant-switch");
+  }
+  get allowDuplicatesSwitch(): Locator {
+    return this.page.getByTestId("allow-duplicates-switch");
+  }
+  get allowPcLvl3Switch(): Locator {
+    return this.page.getByTestId("allow-pc-lvl3-switch");
+  }
+  get manualCloseSwitch(): Locator {
+    return this.page.getByTestId("manual-close-switch");
+  }
 
   // Navigation
-  get merchantsLink(): Locator { return this.page.getByRole("link", { name: "Merchants" }); }
-  get newMerchantLink(): Locator { return this.page.getByRole("link", { name: "New Merchant" }); }
+  get merchantsLink(): Locator {
+    return this.page.getByRole("link", { name: "Merchants" });
+  }
+  get newMerchantLink(): Locator {
+    return this.page.getByRole("link", { name: "New Merchant" });
+  }
 
   // Buttons
-  get createMerchantButton(): Locator { return this.page.getByRole("button", { name: "Create Merchant" }); }
-  get addProcessorButton(): Locator { return this.page.getByRole("button", { name: "Add Processor" }); }
-  get viewDetailsButton(): Locator { return this.page.getByRole("button", { name: "View Details" }); }
-  get confirmTerminalDetailsButton(): Locator { return this.page.getByRole("button", { name: "Yes, I want" }); }
-  get editProcessorButton(): Locator { return this.page.getByRole("button", { name: "Edit" }); }
-  get searchMerchantAccountIdInput(): Locator { return this.page.getByRole("combobox", { name: "Filter by Merchant Account ID" }); }
-  get merchantAccountIdInput(): Locator { return this.page.getByRole("textbox", { name: "Search merchant account id" }); }
-  get applyFilterButton(): Locator { return this.page.getByRole("button", { name: "Apply" }); }
+  get createMerchantButton(): Locator {
+    return this.page.getByRole("button", { name: "Create Merchant" });
+  }
+  get addProcessorButton(): Locator {
+    return this.page.getByRole("button", { name: "Add Processor" });
+  }
+  get viewDetailsButton(): Locator {
+    return this.page.getByRole("button", { name: "View Details" });
+  }
+  get confirmTerminalDetailsButton(): Locator {
+    return this.page.getByRole("button", { name: "Yes, I want" });
+  }
+  get editProcessorButton(): Locator {
+    return this.page.getByRole("button", { name: "Edit" });
+  }
+  get searchMerchantAccountIdInput(): Locator {
+    return this.page.getByRole("combobox", { name: "Filter by Merchant Account ID" });
+  }
+  get merchantAccountIdInput(): Locator {
+    return this.page.getByRole("textbox", { name: "Search merchant account id" });
+  }
+  get applyFilterButton(): Locator {
+    return this.page.getByRole("button", { name: "Apply" });
+  }
 
   deleteProcessorButton(processorName: string): Locator {
-    return this.page.locator("div").filter({ hasText: new RegExp(`^${processorName}`) }).getByRole("button");
+    return this.page
+      .locator("div")
+      .filter({ hasText: new RegExp(`^${processorName}`) })
+      .getByRole("button");
   }
 
   // ---------------------------------------------------------------------------
@@ -168,7 +290,9 @@ export class MerchantPage extends BasePage {
     await expect(this.page.getByRole("heading", { name: "Merchants" })).toBeVisible();
   }
 
-  async clickMerchantsLink(): Promise<void> { await this.merchantsLink.click(); }
+  async clickMerchantsLink(): Promise<void> {
+    await this.merchantsLink.click();
+  }
 
   async clickNewMerchantLink(): Promise<void> {
     await this.newMerchantLink.click();
@@ -178,8 +302,12 @@ export class MerchantPage extends BasePage {
   // ---------------------------------------------------------------------------
   // Processor management
   // ---------------------------------------------------------------------------
-  async addProcessor(): Promise<void> { await this.addProcessorButton.click(); }
-  async deleteProcessor(processorName: string): Promise<void> { await this.deleteProcessorButton(processorName).click(); }
+  async addProcessor(): Promise<void> {
+    await this.addProcessorButton.click();
+  }
+  async deleteProcessor(processorName: string): Promise<void> {
+    await this.deleteProcessorButton(processorName).click();
+  }
 
   async selectDropdownOption(dropdownLocator: Locator, optionText: string): Promise<void> {
     await dropdownLocator.click();
@@ -190,7 +318,9 @@ export class MerchantPage extends BasePage {
 
   // Verifications for popups
   async verifyPopupTerminal(): Promise<void> {
-    await expect(this.page.getByRole("heading", { name: "Information for redirecting" })).toBeVisible();
+    await expect(
+      this.page.getByRole("heading", { name: "Information for redirecting" })
+    ).toBeVisible();
   }
 
   async verifyTerminalDetails(): Promise<void> {
@@ -217,7 +347,9 @@ export class MerchantPage extends BasePage {
     await this.verifyProcessorDetails();
   }
 
-  async clickConfirmTerminalDetails(): Promise<void> { await this.confirmTerminalDetailsButton.click(); }
+  async clickConfirmTerminalDetails(): Promise<void> {
+    await this.confirmTerminalDetailsButton.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Account type helpers
@@ -232,7 +364,11 @@ export class MerchantPage extends BasePage {
     await this.page.getByTestId(`dda-account-type-option-${accountType}`).click();
   }
 
-  async searchAndSelectCombobox(comboboxLocator: Locator, searchText: string, optionText?: string): Promise<void> {
+  async searchAndSelectCombobox(
+    comboboxLocator: Locator,
+    searchText: string,
+    optionText?: string
+  ): Promise<void> {
     await comboboxLocator.click();
     const searchInput = this.page.getByRole("combobox", { expanded: true }).last();
     await searchInput.fill(searchText);
@@ -258,7 +394,11 @@ export class MerchantPage extends BasePage {
     if (data.ddaAccountType) await this.selectDDAAccountType(data.ddaAccountType);
 
     if (data.categorySearch) {
-      await this.searchAndSelectCombobox(this.categoryDropdown, data.categorySearch, data.categoryName);
+      await this.searchAndSelectCombobox(
+        this.categoryDropdown,
+        data.categorySearch,
+        data.categoryName
+      );
     } else {
       await this.selectDropdownOption(this.categoryDropdown, data.categoryName);
     }
@@ -337,7 +477,9 @@ export class MerchantPage extends BasePage {
     await this.allowDuplicatesSwitch.click();
   }
 
-  async submitMerchantForm(): Promise<void> { await this.createMerchantButton.click(); }
+  async submitMerchantForm(): Promise<void> {
+    await this.createMerchantButton.click();
+  }
 
   // ---------------------------------------------------------------------------
   // Verifications
@@ -371,7 +513,8 @@ export class MerchantPage extends BasePage {
       await expect(this.accountDropdown).toContainText(map[data.accountType]);
     }
     if (data.timezone) await expect(this.timezoneDropdown).toContainText(data.timezone);
-    if (data.batchCloseTime) await expect(this.batchCloseTimeInput).toHaveValue(data.batchCloseTime);
+    if (data.batchCloseTime)
+      await expect(this.batchCloseTimeInput).toHaveValue(data.batchCloseTime);
     if (data.ddaAccountType) {
       const map: Record<DDAAccountType, string> = { C: "Checking", S: "Savings" };
       await expect(this.demandDepositAccountDropdown).toContainText(map[data.ddaAccountType]);
@@ -380,7 +523,13 @@ export class MerchantPage extends BasePage {
   }
 
   async verifyContactInfoFields(data: {
-    name: string; phone: string; email: string; city: string; state?: string; zipCode: string; address: string;
+    name: string;
+    phone: string;
+    email: string;
+    city: string;
+    state?: string;
+    zipCode: string;
+    address: string;
   }): Promise<void> {
     await expect(this.contactNameInput).toHaveValue(data.name);
     await expect(this.contactPhoneInput).toHaveValue(data.phone);
@@ -391,7 +540,11 @@ export class MerchantPage extends BasePage {
   }
 
   async verifyBusinessInfoFields(data: {
-    phone: string; city: string; zipCode: string; areaCode: string; address: string;
+    phone: string;
+    city: string;
+    zipCode: string;
+    areaCode: string;
+    address: string;
   }): Promise<void> {
     await expect(this.businessPhoneInput).toHaveValue(data.phone);
     await expect(this.businessCityInput).toHaveValue(data.city);
@@ -410,8 +563,16 @@ export class MerchantPage extends BasePage {
   }
 
   async verifyTSYSProcessorInfoFields(data: {
-    mid: string; terminalNumber: string; bin: string; vNumber: string; agent: string; chain: string;
-    storeNumber: string; debitSharingGroup: string; debitSettlementAgentNumber?: string; debitAmericanBankers?: string;
+    mid: string;
+    terminalNumber: string;
+    bin: string;
+    vNumber: string;
+    agent: string;
+    chain: string;
+    storeNumber: string;
+    debitSharingGroup: string;
+    debitSettlementAgentNumber?: string;
+    debitAmericanBankers?: string;
   }): Promise<void> {
     await expect(this.midInput).toHaveValue(data.mid);
     await expect(this.terminalNumberInput).toHaveValue(data.terminalNumber);
@@ -422,10 +583,14 @@ export class MerchantPage extends BasePage {
     await expect(this.storeNumberInput).toHaveValue(data.storeNumber);
     await expect(this.debitSharingGroupInput).toHaveValue(data.debitSharingGroup);
     if (data.debitSettlementAgentNumber) {
-      await expect(this.debitSettlementAgentNumberInput).toHaveValue(data.debitSettlementAgentNumber);
+      await expect(this.debitSettlementAgentNumberInput).toHaveValue(
+        data.debitSettlementAgentNumber
+      );
     }
     if (data.debitAmericanBankers) {
-      await expect(this.debitAmericanBankersAssociationNumberInput).toHaveValue(data.debitAmericanBankers);
+      await expect(this.debitAmericanBankersAssociationNumberInput).toHaveValue(
+        data.debitAmericanBankers
+      );
     }
   }
 
