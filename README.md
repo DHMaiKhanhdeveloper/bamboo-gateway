@@ -1,5 +1,7 @@
 # e2e_bamboo_gateway
 
+[![CI](https://github.com/DHMaiKhanhdeveloper/bamboo-gateway/actions/workflows/e2e.yml/badge.svg?branch=master)](https://github.com/DHMaiKhanhdeveloper/bamboo-gateway/actions/workflows/e2e.yml)
+
 Enterprise-grade end-to-end + API automated testing framework for the **BambooPay** payment gateway, built on Playwright + TypeScript (ESM).
 
 ## Highlights
