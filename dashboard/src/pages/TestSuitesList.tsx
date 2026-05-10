@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, ExternalLink } from "lucide-react";
+import { RefreshCw, LayoutGrid, List as ListIcon } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
+import { TopBar } from "@/components/TopBar";
 import { StatsHeader } from "@/components/StatsHeader";
+import { CategoryBreakdown } from "@/components/CategoryBreakdown";
 import { SearchBar } from "@/components/SearchBar";
 import { TestSuiteListComponent } from "@/components/TestSuiteListComponent";
 import type { TestSuitesManifest } from "@/types/test-suite";
@@ -19,6 +21,7 @@ export default function TestSuitesList() {
   const [activeTab, setActiveTab] = useState<"all" | "failed" | "passed">(
     "all"
   );
+  const [layout, setLayout] = useState<"grid" | "list">("grid");
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchManifest = async (isRefresh = false) => {
@@ -58,12 +61,21 @@ export default function TestSuitesList() {
     fetchManifest();
   }, []);
 
+  // Aggregate counts
   const totalTests =
     manifest?.suites.reduce((sum, suite) => sum + suite.testCounts.total, 0) ||
     0;
   const passedTests =
     manifest?.suites.reduce((sum, suite) => sum + suite.testCounts.passed, 0) ||
     0;
+  const failedTests =
+    manifest?.suites.reduce((sum, suite) => sum + suite.testCounts.failed, 0) ||
+    0;
+  const skippedTests =
+    manifest?.suites.reduce(
+      (sum, suite) => sum + suite.testCounts.skipped,
+      0
+    ) || 0;
   const passedSuites =
     manifest?.suites.filter(s => s.status === "passed").length || 0;
   const failedSuites =
@@ -76,7 +88,8 @@ export default function TestSuitesList() {
       if (activeTab !== "all" && suite.status !== activeTab) return false;
       if (
         searchQuery &&
-        !suite.suiteName.toLowerCase().includes(searchQuery.toLowerCase())
+        !suite.suiteName.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        !suite.category.toLowerCase().includes(searchQuery.toLowerCase())
       )
         return false;
       return true;
@@ -89,12 +102,13 @@ export default function TestSuitesList() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-14 w-14">
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative h-16 w-16">
             <div className="absolute inset-0 rounded-full border-2 border-slate-200" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-indigo-500 animate-spin" />
+            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-indigo-500 border-r-violet-500 animate-spin" />
+            <div className="absolute inset-3 rounded-full border-2 border-transparent border-b-fuchsia-500 animate-spin" style={{ animationDirection: "reverse", animationDuration: "1.2s" }} />
           </div>
-          <p className="text-slate-500 text-sm">Loading test suites…</p>
+          <p className="text-slate-500 text-sm tracking-wide">Loading test suites…</p>
         </div>
       </div>
     );
@@ -103,6 +117,7 @@ export default function TestSuitesList() {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50/40">
+        <TopBar />
         <div className="container mx-auto px-4 py-12">
           <Card className="max-w-md mx-auto border-rose-200 shadow-lg">
             <CardContent className="pt-6">
@@ -125,40 +140,64 @@ export default function TestSuitesList() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30">
+      <TopBar />
+
       <StatsHeader
         passRate={passRate}
         failedSuites={failedSuites}
         passedSuites={passedSuites}
         totalTests={totalTests}
+        totalSuites={manifest?.suites.length || 0}
+        passedTests={passedTests}
+        failedTests={failedTests}
+        skippedTests={skippedTests}
         lastUpdated={manifest?.lastUpdated || new Date().toISOString()}
       />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-12 -mt-4 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 -mt-2 relative z-10 space-y-6">
+        {/* Category breakdown chart */}
+        <CategoryBreakdown suites={manifest?.suites || []} />
+
+        {/* Filter bar */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
-          className="rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/70 shadow-lg shadow-slate-200/40 p-3 sm:p-4 mb-6"
+          transition={{ duration: 0.4, delay: 0.55 }}
+          className="rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/70 shadow-sm shadow-slate-200/40 p-4 sm:p-5 sticky top-14 z-20"
         >
-          <div className="flex items-center gap-2">
-            <div className="flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex-1 min-w-[200px]">
               <SearchBar
                 value={searchQuery}
                 onChange={setSearchQuery}
-                placeholder="Search test suites…"
+                placeholder="Search suite or category…"
               />
             </div>
 
-            <a
-              href="/reports/index.html"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 h-11 px-3 rounded-md border border-slate-200 bg-white text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition"
-              title="Open Playwright HTML report"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Playwright Report
-            </a>
+            <div className="flex items-center gap-1 rounded-md border border-slate-200 p-0.5 bg-white">
+              <button
+                onClick={() => setLayout("grid")}
+                className={`h-9 w-9 rounded inline-flex items-center justify-center transition ${
+                  layout === "grid"
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-500 hover:bg-slate-100"
+                }`}
+                title="Grid view"
+              >
+                <LayoutGrid className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setLayout("list")}
+                className={`h-9 w-9 rounded inline-flex items-center justify-center transition ${
+                  layout === "list"
+                    ? "bg-slate-900 text-white"
+                    : "text-slate-500 hover:bg-slate-100"
+                }`}
+                title="List view"
+              >
+                <ListIcon className="h-4 w-4" />
+              </button>
+            </div>
 
             <Button
               variant="outline"
@@ -233,22 +272,49 @@ export default function TestSuitesList() {
           </Tabs>
         </motion.div>
 
-        <div className="flex items-center justify-between mb-4 px-1">
+        {/* Result count */}
+        <div className="flex items-center justify-between px-1 -mt-3">
           <p className="text-sm text-slate-600">
             Showing{" "}
-            <span className="text-slate-900 font-medium">
+            <span className="text-slate-900 font-medium tabular-nums">
               {filteredSuites.length}
             </span>{" "}
-            of {manifest?.suites.length || 0} test suite
-            {(manifest?.suites.length || 0) !== 1 ? "s" : ""}
+            of{" "}
+            <span className="tabular-nums">{manifest?.suites.length || 0}</span>{" "}
+            suite{(manifest?.suites.length || 0) !== 1 ? "s" : ""}
           </p>
         </div>
 
-        <TestSuiteListComponent
-          suites={filteredSuites}
-          onSuiteClick={handleSuiteClick}
-          isLoading={false}
-        />
+        {/* Suite list — grid or list layout */}
+        <div
+          className={
+            layout === "grid"
+              ? "grid grid-cols-1 lg:grid-cols-2 gap-4"
+              : "space-y-3"
+          }
+        >
+          <TestSuiteListComponent
+            suites={filteredSuites}
+            onSuiteClick={handleSuiteClick}
+            isLoading={false}
+            embedded
+          />
+        </div>
+
+        {/* Footer */}
+        <footer className="pt-8 text-center text-xs text-slate-400">
+          <p>
+            Bamboo QA Dashboard ·{" "}
+            <a
+              href="https://github.com/DHMaiKhanhdeveloper/bamboo-gateway"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-slate-700 underline-offset-2 hover:underline"
+            >
+              Source on GitHub
+            </a>
+          </p>
+        </footer>
       </div>
     </div>
   );

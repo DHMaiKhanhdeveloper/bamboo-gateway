@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
-import { Card } from "./ui/card";
 import {
   CheckCircle2,
   XCircle,
   Clock,
-  ChevronRight,
+  ArrowUpRight,
   AlertTriangle,
   MinusCircle,
+  Sparkles,
+  Activity,
 } from "lucide-react";
 
 interface TestCounts {
@@ -58,62 +59,86 @@ export function TestSuiteCard({ suite, onClick }: TestSuiteCardProps) {
       : 0;
 
   const palette =
-    passRate >= 90
+    suite.testCounts.failed > 0
       ? {
-          bar: "from-emerald-400 to-emerald-600",
-          ring: "ring-emerald-200",
-          glow: "group-hover:shadow-emerald-200/50",
-          accent: "text-emerald-700",
-          bg: "bg-emerald-50",
-          stroke: "stroke-emerald-500",
-          chip: "bg-emerald-100 text-emerald-700 ring-emerald-200",
-          icon: <CheckCircle2 className="h-4 w-4 text-emerald-600" />,
+          accent: "from-rose-400 to-pink-500",
+          ring: "stroke-rose-500",
+          text: "text-rose-700",
+          bg: "bg-rose-50/60",
+          chip: "bg-rose-100 text-rose-700 ring-rose-200",
+          icon: <XCircle className="h-4 w-4 text-rose-600" />,
+          glow: "group-hover:shadow-rose-300/40",
+          hairline: "from-rose-200/0 via-rose-300/70 to-rose-200/0",
+          label: "Failed",
         }
-      : passRate >= 60
+      : passRate >= 90
         ? {
-            bar: "from-amber-400 to-amber-600",
-            ring: "ring-amber-200",
-            glow: "group-hover:shadow-amber-200/50",
-            accent: "text-amber-700",
-            bg: "bg-amber-50",
-            stroke: "stroke-amber-500",
-            chip: "bg-amber-100 text-amber-700 ring-amber-200",
-            icon: <AlertTriangle className="h-4 w-4 text-amber-600" />,
+            accent: "from-emerald-400 to-teal-500",
+            ring: "stroke-emerald-500",
+            text: "text-emerald-700",
+            bg: "bg-emerald-50/60",
+            chip: "bg-emerald-100 text-emerald-700 ring-emerald-200",
+            icon: <CheckCircle2 className="h-4 w-4 text-emerald-600" />,
+            glow: "group-hover:shadow-emerald-300/40",
+            hairline: "from-emerald-200/0 via-emerald-300/70 to-emerald-200/0",
+            label: "Passing",
           }
-        : {
-            bar: "from-rose-400 to-rose-600",
-            ring: "ring-rose-200",
-            glow: "group-hover:shadow-rose-200/50",
-            accent: "text-rose-700",
-            bg: "bg-rose-50",
-            stroke: "stroke-rose-500",
-            chip: "bg-rose-100 text-rose-700 ring-rose-200",
-            icon: <XCircle className="h-4 w-4 text-rose-600" />,
-          };
+        : passRate >= 60
+          ? {
+              accent: "from-amber-400 to-orange-500",
+              ring: "stroke-amber-500",
+              text: "text-amber-700",
+              bg: "bg-amber-50/60",
+              chip: "bg-amber-100 text-amber-700 ring-amber-200",
+              icon: <AlertTriangle className="h-4 w-4 text-amber-600" />,
+              glow: "group-hover:shadow-amber-300/40",
+              hairline: "from-amber-200/0 via-amber-300/70 to-amber-200/0",
+              label: "Warning",
+            }
+          : {
+              accent: "from-slate-300 to-slate-400",
+              ring: "stroke-slate-400",
+              text: "text-slate-600",
+              bg: "bg-slate-50/60",
+              chip: "bg-slate-100 text-slate-600 ring-slate-200",
+              icon: <MinusCircle className="h-4 w-4 text-slate-500" />,
+              glow: "group-hover:shadow-slate-300/40",
+              hairline: "from-slate-200/0 via-slate-300/70 to-slate-200/0",
+              label: "Idle",
+            };
 
-  // Donut chart geometry
-  const size = 56;
-  const stroke = 5;
+  // Donut geometry
+  const size = 64;
+  const stroke = 6;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
   const dash = (passRate / 100) * c;
 
+  // Mini bar segments
+  const totalForBar = Math.max(suite.testCounts.total, 1);
+  const passedW = (suite.testCounts.passed / totalForBar) * 100;
+  const failedW = (suite.testCounts.failed / totalForBar) * 100;
+  const skippedW = (suite.testCounts.skipped / totalForBar) * 100;
+
   return (
-    <motion.div
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.995 }}
-      transition={{ duration: 0.15 }}
-    >
-      <Card
+    <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }}>
+      <div
         onClick={onClick}
-        className={`group relative cursor-pointer overflow-hidden border border-slate-200 bg-white py-0 transition-all duration-300 hover:border-slate-300 hover:shadow-xl ${palette.glow}`}
+        className={`group relative cursor-pointer overflow-hidden rounded-2xl border border-slate-200/70 bg-white p-5 sm:p-6 transition-all duration-300 hover:border-slate-300 hover:shadow-xl shadow-sm ${palette.glow}`}
       >
+        {/* Top hairline */}
         <div
-          className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${palette.bar}`}
+          className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${palette.hairline}`}
         />
 
-        <div className="flex items-center gap-4 p-4 sm:p-5 pl-5 sm:pl-6">
-          <div className="relative flex-shrink-0" style={{ width: size, height: size }}>
+        {/* Subtle corner glow */}
+        <div
+          className={`pointer-events-none absolute -top-12 -right-12 h-36 w-36 rounded-full bg-gradient-to-br ${palette.accent} opacity-[0.07] blur-2xl group-hover:opacity-[0.12] transition`}
+        />
+
+        <div className="flex items-start gap-4 sm:gap-5">
+          {/* Donut */}
+          <div className="flex-shrink-0 relative" style={{ width: size, height: size }}>
             <svg width={size} height={size} className="-rotate-90">
               <circle
                 cx={size / 2}
@@ -128,82 +153,146 @@ export function TestSuiteCard({ suite, onClick }: TestSuiteCardProps) {
                 r={r}
                 strokeWidth={stroke}
                 strokeLinecap="round"
-                className={`${palette.stroke} fill-none`}
+                className={`${palette.ring} fill-none`}
                 initial={{ strokeDasharray: `0 ${c}` }}
                 animate={{ strokeDasharray: `${dash} ${c}` }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className={`text-sm font-semibold tabular-nums ${palette.accent}`}>
+              <span
+                className={`text-base font-semibold tabular-nums ${palette.text}`}
+              >
                 {passRate}%
               </span>
             </div>
           </div>
 
+          {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1.5">
-              {palette.icon}
-              <h3 className="text-slate-900 font-medium truncate">
-                {suite.suiteName}
-              </h3>
-              <span
-                className={`hidden sm:inline-flex items-center px-2 py-0.5 rounded-md text-[11px] uppercase tracking-wider ring-1 ${palette.chip}`}
-              >
-                {suite.category}
-              </span>
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <h3 className="text-slate-900 font-semibold truncate">
+                  {suite.suiteName}
+                </h3>
+              </div>
+              <div className="flex-shrink-0 flex items-center gap-1.5">
+                <span
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wider ring-1 font-medium ${palette.chip}`}
+                >
+                  {palette.icon}
+                  {palette.label}
+                </span>
+              </div>
             </div>
 
-            <div className="flex items-center gap-3 text-xs text-slate-500 flex-wrap">
-              <span className="inline-flex items-center gap-1">
+            <div className="flex items-center gap-2 mb-3 flex-wrap">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] uppercase tracking-wider ring-1 bg-indigo-50 text-indigo-700 ring-indigo-200">
+                {suite.category}
+              </span>
+              <span className="inline-flex items-center gap-1 text-xs text-slate-500">
                 <Clock className="h-3 w-3" />
                 {formatDate(suite.lastRun)}
               </span>
-              <span className="text-slate-300">·</span>
-              <span className="font-medium text-slate-700">
-                {suite.testCounts.total}{" "}
-                {suite.testCounts.total === 1 ? "test" : "tests"}
+              <span className="text-slate-300 text-xs">·</span>
+              <span className="text-xs text-slate-500">
+                <span className="font-medium text-slate-700 tabular-nums">
+                  {suite.testCounts.total}
+                </span>{" "}
+                test{suite.testCounts.total !== 1 ? "s" : ""}
               </span>
+            </div>
 
+            {/* Mini bar */}
+            <div className="flex h-1.5 w-full rounded-full overflow-hidden bg-slate-100">
+              {passedW > 0 && (
+                <motion.div
+                  className="bg-emerald-500"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${passedW}%` }}
+                  transition={{ duration: 0.7 }}
+                />
+              )}
+              {failedW > 0 && (
+                <motion.div
+                  className="bg-rose-500"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${failedW}%` }}
+                  transition={{ duration: 0.7, delay: 0.1 }}
+                />
+              )}
+              {skippedW > 0 && (
+                <motion.div
+                  className="bg-slate-400"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${skippedW}%` }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                />
+              )}
+            </div>
+
+            {/* Inline stats */}
+            <div className="mt-3 flex items-center gap-3 text-xs flex-wrap">
               {suite.testCounts.passed > 0 && (
                 <span className="inline-flex items-center gap-1 text-emerald-600">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                  {suite.testCounts.passed} passed
+                  <span className="font-medium tabular-nums">
+                    {suite.testCounts.passed}
+                  </span>{" "}
+                  passed
                 </span>
               )}
               {suite.testCounts.failed > 0 && (
                 <span className="inline-flex items-center gap-1 text-rose-600">
                   <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                  {suite.testCounts.failed} failed
+                  <span className="font-medium tabular-nums">
+                    {suite.testCounts.failed}
+                  </span>{" "}
+                  failed
                 </span>
               )}
               {suite.testCounts.skipped > 0 && (
                 <span className="inline-flex items-center gap-1 text-slate-500">
-                  <MinusCircle className="h-3 w-3" />
-                  {suite.testCounts.skipped} skipped
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                  <span className="font-medium tabular-nums">
+                    {suite.testCounts.skipped}
+                  </span>{" "}
+                  skipped
                 </span>
               )}
               {suite.testCounts.flaky > 0 && (
                 <span className="inline-flex items-center gap-1 text-amber-600">
-                  <AlertTriangle className="h-3 w-3" />
-                  {suite.testCounts.flaky} flaky
+                  <Sparkles className="h-3 w-3" />
+                  <span className="font-medium tabular-nums">
+                    {suite.testCounts.flaky}
+                  </span>{" "}
+                  flaky
                 </span>
               )}
             </div>
           </div>
 
-          <ChevronRight className="hidden sm:block h-5 w-5 text-slate-300 transition-all group-hover:text-slate-600 group-hover:translate-x-0.5" />
+          {/* Arrow */}
+          <div className="flex-shrink-0 self-center">
+            <div
+              className={`h-9 w-9 rounded-full bg-slate-50 flex items-center justify-center transition-all group-hover:bg-slate-900 ${palette.bg}`}
+            >
+              <ArrowUpRight className="h-4 w-4 text-slate-400 group-hover:text-white transition" />
+            </div>
+          </div>
         </div>
 
-        <div className="h-1 w-full bg-slate-100">
-          <motion.div
-            className={`h-full bg-gradient-to-r ${palette.bar}`}
-            initial={{ width: 0 }}
-            animate={{ width: `${passRate}%` }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          />
+        {/* Health score progress */}
+        <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+          <span className="inline-flex items-center gap-1">
+            <Activity className="h-3 w-3" />
+            Health score
+          </span>
+          <span className="tabular-nums font-medium text-slate-700">
+            {suite.healthScore}/100
+          </span>
         </div>
-      </Card>
+      </div>
     </motion.div>
   );
 }

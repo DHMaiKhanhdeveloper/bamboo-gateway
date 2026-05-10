@@ -8,6 +8,7 @@ interface TestSuiteListProps {
   suites: TestSuiteSummary[];
   onSuiteClick: (suiteName: string) => void;
   isLoading?: boolean;
+  embedded?: boolean;
 }
 
 function LoadingSkeleton() {
@@ -70,48 +71,42 @@ export function TestSuiteListComponent({
   suites,
   onSuiteClick,
   isLoading = false,
+  embedded = false,
 }: TestSuiteListProps) {
-  // Loading state
   if (isLoading) {
-    return (
-      <div className="space-y-3">
+    const skeletons = (
+      <>
         {[...Array(3)].map((_, i) => (
           <LoadingSkeleton key={i} />
         ))}
-      </div>
+      </>
     );
+    return embedded ? skeletons : <div className="space-y-3">{skeletons}</div>;
   }
 
-  // Empty state
   if (suites.length === 0) {
-    return <EmptyState hasFilters={false} />;
+    const empty = <EmptyState hasFilters={false} />;
+    return embedded ? <div className="col-span-full">{empty}</div> : empty;
   }
 
-  // Sort by most recent first, then prioritize failed tests
   const sortedSuites = [...suites].sort((a, b) => {
-    // First, sort by date (most recent first)
     const dateA = new Date(a.lastRun).getTime();
     const dateB = new Date(b.lastRun).getTime();
     const dateDiff = dateB - dateA;
-
-    // If dates are very close (within 5 minutes), prioritize failed tests
     if (Math.abs(dateDiff) < 300000) {
       if (a.status === "failed" && b.status !== "failed") return -1;
       if (a.status !== "failed" && b.status === "failed") return 1;
     }
-
     return dateDiff;
   });
 
-  return (
-    <div className="space-y-3">
-      {sortedSuites.map(suite => (
-        <TestSuiteCard
-          key={suite.suiteName}
-          suite={suite}
-          onClick={() => onSuiteClick(suite.suiteName)}
-        />
-      ))}
-    </div>
-  );
+  const cards = sortedSuites.map(suite => (
+    <TestSuiteCard
+      key={suite.suiteName}
+      suite={suite}
+      onClick={() => onSuiteClick(suite.suiteName)}
+    />
+  ));
+
+  return embedded ? <>{cards}</> : <div className="space-y-3">{cards}</div>;
 }
